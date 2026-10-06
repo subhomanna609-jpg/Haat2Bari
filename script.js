@@ -1,5 +1,6 @@
 // =====================================
-// HAAT2BARI CART + SEARCH + WHATSAPP
+// HAAT2BARI
+// CART + SEARCH + CATEGORY + WHATSAPP
 // =====================================
 
 const WHATSAPP_NUMBER = "919832495276";
@@ -15,17 +16,23 @@ function addToCart(name, price) {
 
   price = Number(price);
 
-  const existing =
-    cart.find(item => item.name === name);
+  const existingProduct =
+    cart.find(function(item) {
+      return item.name === name;
+    });
 
-  if (existing) {
-    existing.quantity += 1;
+  if (existingProduct) {
+
+    existingProduct.quantity += 1;
+
   } else {
+
     cart.push({
       name: name,
       price: price,
       quantity: 1
     });
+
   }
 
   updateCart();
@@ -34,9 +41,12 @@ function addToCart(name, price) {
     document.getElementById("cart");
 
   if (cartBox) {
+
     cartBox.scrollIntoView({
-      behavior: "smooth"
+      behavior: "smooth",
+      block: "start"
     });
+
   }
 }
 
@@ -58,6 +68,7 @@ function updateCart() {
   }
 
 
+  // Cart empty
   if (cart.length === 0) {
 
     cartItems.innerHTML =
@@ -74,7 +85,7 @@ function updateCart() {
   cartItems.innerHTML = "";
 
 
-  cart.forEach((item, index) => {
+  cart.forEach(function(item, index) {
 
     const itemTotal =
       item.price * item.quantity;
@@ -87,31 +98,51 @@ function updateCart() {
       <div class="cart-item">
 
         <div>
-          <strong>${item.name}</strong>
+
+          <strong>
+            ${item.name}
+          </strong>
+
           <br>
-          ₹${item.price} × ${item.quantity}
-          = ₹${itemTotal}
+
+          ₹${item.price}
+          ×
+          ${item.quantity}
+          =
+          <strong>
+            ₹${itemTotal}
+          </strong>
+
         </div>
+
 
         <div class="cart-buttons">
 
           <button
+            type="button"
             class="qty-btn"
             onclick="decreaseQuantity(${index})"
           >
             −
           </button>
 
-          <strong>${item.quantity}</strong>
+
+          <strong>
+            ${item.quantity}
+          </strong>
+
 
           <button
+            type="button"
             class="qty-btn"
             onclick="increaseQuantity(${index})"
           >
             +
           </button>
 
+
           <button
+            type="button"
             class="remove-btn"
             onclick="removeFromCart(${index})"
           >
@@ -128,11 +159,12 @@ function updateCart() {
 
 
   cartTotal.textContent = total;
+
 }
 
 
 // =====================================
-// PLUS
+// INCREASE QUANTITY
 // =====================================
 
 function increaseQuantity(index) {
@@ -144,11 +176,12 @@ function increaseQuantity(index) {
   cart[index].quantity += 1;
 
   updateCart();
+
 }
 
 
 // =====================================
-// MINUS
+// DECREASE QUANTITY
 // =====================================
 
 function decreaseQuantity(index) {
@@ -159,16 +192,21 @@ function decreaseQuantity(index) {
 
   cart[index].quantity -= 1;
 
+
   if (cart[index].quantity <= 0) {
+
     cart.splice(index, 1);
+
   }
 
+
   updateCart();
+
 }
 
 
 // =====================================
-// REMOVE
+// REMOVE FROM CART
 // =====================================
 
 function removeFromCart(index) {
@@ -180,11 +218,12 @@ function removeFromCart(index) {
   cart.splice(index, 1);
 
   updateCart();
+
 }
 
 
 // =====================================
-// SEARCH + CATEGORY
+// SEARCH + CATEGORY FILTER
 // =====================================
 
 function filterProducts() {
@@ -194,6 +233,7 @@ function filterProducts() {
 
   const categorySelect =
     document.getElementById("categoryFilter");
+
 
   if (!searchInput || !categorySelect) {
     return;
@@ -214,31 +254,55 @@ function filterProducts() {
     document.querySelectorAll(".product-card");
 
 
-  products.forEach(card => {
+  products.forEach(function(card) {
 
-    const productText =
-      card.textContent.toLowerCase();
 
+    // Product name
+    const nameElement =
+      card.querySelector("h3");
+
+
+    const productName =
+      nameElement
+        ? nameElement.textContent
+            .toLowerCase()
+            .trim()
+        : "";
+
+
+    // Product category
     const productCategory =
-      card.dataset.category || "grocery";
+      card.getAttribute("data-category") || "";
 
 
+    // Search check
     const searchMatch =
-      productText.includes(searchText);
+      searchText === "" ||
+      productName.includes(searchText);
 
 
+    // Category check
     const categoryMatch =
       selectedCategory === "all" ||
       selectedCategory === productCategory;
 
 
-    if (searchMatch && categoryMatch) {
+    // Show / Hide
+    if (
+      searchMatch &&
+      categoryMatch
+    ) {
+
       card.style.display = "";
+
     } else {
+
       card.style.display = "none";
+
     }
 
   });
+
 }
 
 
@@ -258,8 +322,8 @@ function goToOrder() {
   }
 
 
-  const products =
-    cart.map(item => {
+  const productsText =
+    cart.map(function(item) {
 
       return (
         item.name +
@@ -277,21 +341,26 @@ function goToOrder() {
 
 
   if (productsInput) {
-    productsInput.value = products;
+
+    productsInput.value =
+      productsText;
+
   }
 
 
-  const order =
+  const orderSection =
     document.getElementById("order");
 
 
-  if (order) {
+  if (orderSection) {
 
-    order.scrollIntoView({
-      behavior: "smooth"
+    orderSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
     });
 
   }
+
 }
 
 
@@ -304,6 +373,7 @@ function submitOrder(event) {
   event.preventDefault();
 
 
+  // Cart check
   if (cart.length === 0) {
 
     alert(
@@ -314,32 +384,65 @@ function submitOrder(event) {
   }
 
 
+  // Customer information
+  const nameElement =
+    document.getElementById("name");
+
+  const phoneElement =
+    document.getElementById("phone");
+
+  const areaElement =
+    document.getElementById("area");
+
+  const addressElement =
+    document.getElementById("address");
+
+  const paymentElement =
+    document.getElementById("payment");
+
+  const noteElement =
+    document.getElementById("note");
+
+
   const name =
-    document.getElementById("name").value.trim();
+    nameElement
+      ? nameElement.value.trim()
+      : "";
 
 
   const phone =
-    document.getElementById("phone").value.trim();
+    phoneElement
+      ? phoneElement.value.trim()
+      : "";
 
 
   const area =
-    document.getElementById("area").value.trim();
+    areaElement
+      ? areaElement.value.trim()
+      : "";
 
 
   const address =
-    document.getElementById("address").value.trim();
+    addressElement
+      ? addressElement.value.trim()
+      : "";
 
 
   const payment =
-    document.getElementById("payment").value;
+    paymentElement
+      ? paymentElement.value
+      : "Cash on Delivery";
 
 
   const note =
-    document.getElementById("note").value.trim();
+    noteElement
+      ? noteElement.value.trim()
+      : "";
 
 
+  // Products
   const products =
-    cart.map(item => {
+    cart.map(function(item) {
 
       return (
         item.name +
@@ -352,14 +455,22 @@ function submitOrder(event) {
     }).join("\n");
 
 
+  // Total
   const total =
     cart.reduce(
-      (sum, item) =>
-        sum + (item.price * item.quantity),
+      function(sum, item) {
+
+        return (
+          sum +
+          (item.price * item.quantity)
+        );
+
+      },
       0
     );
 
 
+  // WhatsApp message
   const message =
 `🛒 *New Haat2Bari Order*
 
@@ -385,6 +496,7 @@ ${note || "None"}
 Please confirm my order.`;
 
 
+  // WhatsApp URL
   const whatsappURL =
     "https://wa.me/" +
     WHATSAPP_NUMBER +
@@ -392,15 +504,17 @@ Please confirm my order.`;
     encodeURIComponent(message);
 
 
+  // Open WhatsApp
   window.open(
     whatsappURL,
     "_blank"
   );
+
 }
 
 
 // =====================================
-// START
+// PAGE START
 // =====================================
 
 document.addEventListener(
@@ -408,6 +522,34 @@ document.addEventListener(
   function() {
 
     updateCart();
+
+
+    // Search automatically ready
+    const searchInput =
+      document.getElementById("productSearch");
+
+    const categorySelect =
+      document.getElementById("categoryFilter");
+
+
+    if (searchInput) {
+
+      searchInput.addEventListener(
+        "input",
+        filterProducts
+      );
+
+    }
+
+
+    if (categorySelect) {
+
+      categorySelect.addEventListener(
+        "change",
+        filterProducts
+      );
+
+    }
 
   }
 );
