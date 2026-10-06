@@ -2,13 +2,108 @@
 <html lang="bn">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Haat2Bari - Grocery Delivery</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    /* SEARCH */
+    .shop-tools {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+      justify-content: center;
+    }
+
+    .shop-tools input,
+    .shop-tools select {
+      padding: 13px 15px;
+      border: 1px solid #d8e2da;
+      border-radius: 10px;
+      background: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .shop-tools input {
+      width: 60%;
+      max-width: 450px;
+    }
+
+    .shop-tools select {
+      width: 220px;
+    }
+
+    .shop-tools input:focus,
+    .shop-tools select:focus {
+      border-color: #087f3e;
+    }
+
+    /* CART */
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .cart-buttons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cart-buttons button {
+      border: none;
+      border-radius: 6px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .qty-btn {
+      background: #eeeeee;
+    }
+
+    .remove-btn {
+      background: #ffe5e5;
+      color: #d00000;
+    }
+
+    @media (max-width: 600px) {
+
+      .shop-tools {
+        flex-direction: column;
+      }
+
+      .shop-tools input,
+      .shop-tools select {
+        width: 100%;
+        max-width: none;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
@@ -21,13 +116,19 @@
 
     <div class="brand">
 
-      <img src="logo.png" alt="Haat2Bari Logo">
+      <img
+        src="logo.png"
+        alt="Haat2Bari Logo"
+      >
 
       <span>Haat2Bari</span>
 
     </div>
 
-    <a href="#products" class="nav-btn">
+    <a
+      href="#products"
+      class="nav-btn"
+    >
       Order Now
     </a>
 
@@ -61,11 +162,17 @@
 
       <div class="hero-actions">
 
-        <a href="#products" class="primary">
+        <a
+          href="#products"
+          class="primary"
+        >
           🛒 Shop Now
         </a>
 
-        <a href="#how" class="secondary">
+        <a
+          href="#how"
+          class="secondary"
+        >
           কীভাবে কাজ করে?
         </a>
 
@@ -82,13 +189,11 @@
         আপনার এলাকার মধ্যে সহজ ও দ্রুত delivery.
       </p>
 
-
       <h3>💰 Cash on Delivery</h3>
 
       <p>
         পণ্য হাতে পেয়ে payment করতে পারবেন।
       </p>
-
 
       <h3>📱 Easy Ordering</h3>
 
@@ -106,21 +211,24 @@
 
 <!-- ================= PRODUCTS ================= -->
 
-<section class="section" id="products">
+<section
+  class="section"
+  id="products"
+>
 
   <div class="container">
 
-
     <div class="section-title">
 
-      <h2>🛒 Our Products</h2>
+      <h2>
+        🛒 Our Products
+      </h2>
 
       <p>
         আপনার প্রয়োজনীয় জিনিস বেছে নিন
       </p>
 
     </div>
-
 
 
     <!-- SEARCH + CATEGORY -->
@@ -178,18 +286,19 @@
 
 
 
-    <!-- PRODUCT GRID -->
+    <!-- ================= PRODUCT GRID ================= -->
 
     <div class="product-grid">
 
 
-      <!-- 1 RICE -->
+      <!-- 1 -->
 
-      <div class="product-card" data-category="grocery">
+      <div
+        class="product-card"
+        data-category="grocery"
+      >
 
-        <div class="product-icon">
-          🍚
-        </div>
+        <div class="product-icon">🍚</div>
 
         <h3>চাল</h3>
 
@@ -209,14 +318,14 @@
       </div>
 
 
+      <!-- 2 -->
 
-      <!-- 2 ATTA -->
+      <div
+        class="product-card"
+        data-category="grocery"
+      >
 
-      <div class="product-card" data-category="grocery">
-
-        <div class="product-icon">
-          🌾
-        </div>
+        <div class="product-icon">🌾</div>
 
         <h3>আটা</h3>
 
@@ -236,14 +345,14 @@
       </div>
 
 
+      <!-- 3 -->
 
-      <!-- 3 MASOOR DAL -->
+      <div
+        class="product-card"
+        data-category="grocery"
+      >
 
-      <div class="product-card" data-category="grocery">
-
-        <div class="product-icon">
-          🥣
-        </div>
+        <div class="product-icon">🥣</div>
 
         <h3>মসুর ডাল</h3>
 
@@ -263,14 +372,14 @@
       </div>
 
 
+      <!-- 4 -->
 
-      <!-- 4 MOONG DAL -->
+      <div
+        class="product-card"
+        data-category="grocery"
+      >
 
-      <div class="product-card" data-category="grocery">
-
-        <div class="product-icon">
-          🫘
-        </div>
+        <div class="product-icon">🫘</div>
 
         <h3>মুগ ডাল</h3>
 
@@ -282,4 +391,979 @@
 
         <button
           class="add-cart"
-          onclick="addToCart('মুগ ডাল 1 kg',
+          onclick="addToCart('মুগ ডাল 1 kg',130)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 5 -->
+
+      <div
+        class="product-card"
+        data-category="grocery"
+      >
+
+        <div class="product-icon">🧂</div>
+
+        <h3>লবণ</h3>
+
+        <p>1 kg</p>
+
+        <div class="product-price">
+          ₹25
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('লবণ 1 kg',25)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 6 -->
+
+      <div
+        class="product-card"
+        data-category="grocery"
+      >
+
+        <div class="product-icon">🍬</div>
+
+        <h3>চিনি</h3>
+
+        <p>1 kg</p>
+
+        <div class="product-price">
+          ₹50
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('চিনি 1 kg',50)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 7 -->
+
+      <div
+        class="product-card"
+        data-category="oil"
+      >
+
+        <div class="product-icon">🫗</div>
+
+        <h3>সরিষার তেল</h3>
+
+        <p>1 L</p>
+
+        <div class="product-price">
+          ₹160
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('সরিষার তেল 1 L',160)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 8 -->
+
+      <div
+        class="product-card"
+        data-category="oil"
+      >
+
+        <div class="product-icon">🫗</div>
+
+        <h3>সয়াবিন তেল</h3>
+
+        <p>1 L</p>
+
+        <div class="product-price">
+          ₹140
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('সয়াবিন তেল 1 L',140)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 9 -->
+
+      <div
+        class="product-card"
+        data-category="snacks"
+      >
+
+        <div class="product-icon">🍪</div>
+
+        <h3>বিস্কুট</h3>
+
+        <p>1 packet</p>
+
+        <div class="product-price">
+          ₹10
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('বিস্কুট 1 packet',10)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 10 -->
+
+      <div
+        class="product-card"
+        data-category="snacks"
+      >
+
+        <div class="product-icon">🍜</div>
+
+        <h3>নুডলস</h3>
+
+        <p>1 packet</p>
+
+        <div class="product-price">
+          ₹15
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('নুডলস 1 packet',15)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 11 -->
+
+      <div
+        class="product-card"
+        data-category="snacks"
+      >
+
+        <div class="product-icon">🥜</div>
+
+        <h3>চানাচুর</h3>
+
+        <p>200 g</p>
+
+        <div class="product-price">
+          ₹35
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('চানাচুর 200 g',35)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 12 -->
+
+      <div
+        class="product-card"
+        data-category="drinks"
+      >
+
+        <div class="product-icon">🍵</div>
+
+        <h3>চা</h3>
+
+        <p>250 g</p>
+
+        <div class="product-price">
+          ₹120
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('চা 250 g',120)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 13 -->
+
+      <div
+        class="product-card"
+        data-category="personal"
+      >
+
+        <div class="product-icon">🧼</div>
+
+        <h3>সাবান</h3>
+
+        <p>1 pc</p>
+
+        <div class="product-price">
+          ₹35
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('সাবান 1 pc',35)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 14 -->
+
+      <div
+        class="product-card"
+        data-category="personal"
+      >
+
+        <div class="product-icon">🪥</div>
+
+        <h3>টুথপেস্ট</h3>
+
+        <p>100 g</p>
+
+        <div class="product-price">
+          ₹60
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('টুথপেস্ট 100 g',60)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 15 -->
+
+      <div
+        class="product-card"
+        data-category="household"
+      >
+
+        <div class="product-icon">🧺</div>
+
+        <h3>ডিটারজেন্ট</h3>
+
+        <p>1 kg</p>
+
+        <div class="product-price">
+          ₹70
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('ডিটারজেন্ট 1 kg',70)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 16 -->
+
+      <div
+        class="product-card"
+        data-category="grocery"
+      >
+
+        <div class="product-icon">🥚</div>
+
+        <h3>ডিম</h3>
+
+        <p>6 pcs</p>
+
+        <div class="product-price">
+          ₹45
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('ডিম 6 pcs',45)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 17 -->
+
+      <div
+        class="product-card"
+        data-category="drinks"
+      >
+
+        <div class="product-icon">💧</div>
+
+        <h3>পানীয় জল</h3>
+
+        <p>1 L</p>
+
+        <div class="product-price">
+          ₹20
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('পানীয় জল 1 L',20)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 18 -->
+
+      <div
+        class="product-card"
+        data-category="fresh"
+      >
+
+        <div class="product-icon">🥔</div>
+
+        <h3>আলু</h3>
+
+        <p>1 kg</p>
+
+        <div class="product-price">
+          ₹30
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('আলু 1 kg',30)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 19 -->
+
+      <div
+        class="product-card"
+        data-category="fresh"
+      >
+
+        <div class="product-icon">🧅</div>
+
+        <h3>পেঁয়াজ</h3>
+
+        <p>1 kg</p>
+
+        <div class="product-price">
+          ₹35
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('পেঁয়াজ 1 kg',35)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+      <!-- 20 -->
+
+      <div
+        class="product-card"
+        data-category="fresh"
+      >
+
+        <div class="product-icon">🍅</div>
+
+        <h3>টমেটো</h3>
+
+        <p>1 kg</p>
+
+        <div class="product-price">
+          ₹40
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart('টমেটো 1 kg',40)"
+        >
+          Add to Cart 🛒
+        </button>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ================= CART ================= -->
+
+    <div
+      class="cart-box"
+      id="cart"
+    >
+
+      <h2>
+        🛒 Your Cart
+      </h2>
+
+      <div id="cartItems">
+
+        <p>
+          আপনার Cart এখনো খালি।
+        </p>
+
+      </div>
+
+      <h3>
+        Total: ₹
+        <span id="cartTotal">0</span>
+      </h3>
+
+      <button
+        class="primary"
+        onclick="goToOrder()"
+      >
+        Proceed to Order →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section
+  class="section"
+  id="how"
+>
+
+  <div class="container">
+
+    <div class="section-title">
+
+      <h2>
+        কীভাবে কাজ করে?
+      </h2>
+
+      <p>
+        মাত্র ৩টি সহজ ধাপে অর্ডার করুন
+      </p>
+
+    </div>
+
+
+    <div class="steps">
+
+
+      <div class="card">
+
+        <div class="icon">🛒</div>
+
+        <h3>
+          1. Product বেছে নিন
+        </h3>
+
+        <p>
+          আপনার দরকারি product Cart-এ যোগ করুন।
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="icon">📝</div>
+
+        <h3>
+          2. Order করুন
+        </h3>
+
+        <p>
+          আপনার নাম, phone ও address দিন।
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="icon">🚚</div>
+
+        <h3>
+          3. Delivery পান
+        </h3>
+
+        <p>
+          আপনার বাড়িতে product পৌঁছে যাবে।
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= ORDER ================= -->
+
+<section
+  class="section order-section"
+  id="order"
+>
+
+  <div class="container">
+
+    <div class="section-title">
+
+      <h2>
+        📦 Place Your Order
+      </h2>
+
+      <p>
+        নিচের তথ্যগুলো পূরণ করুন
+      </p>
+
+    </div>
+
+
+    <form
+      class="order-form"
+      id="orderForm"
+    >
+
+      <label>
+
+        আপনার নাম
+
+        <input
+          type="text"
+          id="name"
+          placeholder="আপনার নাম লিখুন"
+          required
+        >
+
+      </label>
+
+
+      <label>
+
+        Phone Number
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="10 digit mobile number"
+          required
+        >
+
+      </label>
+
+
+      <label>
+
+        Area / Village
+
+        <input
+          type="text"
+          id="area"
+          placeholder="আপনার এলাকা / গ্রামের নাম"
+          required
+        >
+
+      </label>
+
+
+      <label>
+
+        Full Address
+
+        <textarea
+          id="address"
+          placeholder="বাড়ির সম্পূর্ণ ঠিকানা লিখুন"
+          required
+        ></textarea>
+
+      </label>
+
+
+      <label>
+
+        Products
+
+        <textarea
+          id="productsInput"
+          placeholder="Cart থেকে product এখানে আসবে"
+          readonly
+        ></textarea>
+
+      </label>
+
+
+      <label>
+
+        Payment Method
+
+        <select id="payment">
+
+          <option value="Cash on Delivery">
+            Cash on Delivery
+          </option>
+
+          <option value="UPI">
+            UPI
+          </option>
+
+        </select>
+
+      </label>
+
+
+      <label>
+
+        Note
+
+        <textarea
+          id="note"
+          placeholder="কোনো বিশেষ কথা থাকলে লিখুন"
+        ></textarea>
+
+      </label>
+
+
+      <button
+        type="submit"
+        class="primary"
+      >
+        Order Now 📲
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="section contact">
+
+  <div class="container contact-box">
+
+    <h2>
+      📞 Contact Haat2Bari
+    </h2>
+
+    <p>
+      আপনার কোনো প্রশ্ন থাকলে আমাদের সাথে যোগাযোগ করুন।
+    </p>
+
+
+    <div class="contact-actions">
+
+      <a
+        href="https://wa.me/919832495276"
+        target="_blank"
+        class="primary"
+      >
+        WhatsApp
+      </a>
+
+
+      <a
+        href="tel:+919832495276"
+        class="secondary"
+      >
+        Call Now
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+  <p>
+    © 2026 Haat2Bari. All Rights Reserved.
+  </p>
+
+  <p>
+    Local Grocery Delivery 🛒
+  </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+  let cart = [];
+
+
+  // ===============================
+  // ADD TO CART
+  // ===============================
+
+  function addToCart(name, price) {
+
+    const existing =
+      cart.find(item => item.name === name);
+
+    if (existing) {
+
+      existing.quantity += 1;
+
+    } else {
+
+      cart.push({
+        name: name,
+        price: Number(price),
+        quantity: 1
+      });
+
+    }
+
+    updateCart();
+
+    document
+      .getElementById("cart")
+      ?.scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  // ===============================
+  // UPDATE CART
+  // ===============================
+
+  function updateCart() {
+
+    const cartItems =
+      document.getElementById("cartItems");
+
+    const cartTotal =
+      document.getElementById("cartTotal");
+
+    if (!cartItems || !cartTotal) {
+      return;
+    }
+
+
+    if (cart.length === 0) {
+
+      cartItems.innerHTML =
+        "<p>আপনার Cart এখনো খালি।</p>";
+
+      cartTotal.textContent = "0";
+
+      return;
+
+    }
+
+
+    let total = 0;
+
+    cartItems.innerHTML = "";
+
+
+    cart.forEach((item, index) => {
+
+      const itemTotal =
+        item.price * item.quantity;
+
+      total += itemTotal;
+
+
+      cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+          <div>
+
+            <strong>
+              ${item.name}
+            </strong>
+
+            <br>
+
+            ₹${item.price}
+            ×
+            ${item.quantity}
+
+            =
+            <strong>
+              ₹${itemTotal}
+            </strong>
+
+          </div>
+
+
+          <div class="cart-buttons">
+
+            <button
+              class="qty-btn"
+              onclick="decreaseQuantity(${index})"
+            >
+              −
+            </button>
+
+
+            <strong>
+              ${item.quantity}
+            </strong>
+
+
+            <button
+              class="qty-btn"
+              onclick="increaseQuantity(${index})"
+            >
+              +
+            </button>
+
+
+            <button
+              class="remove-btn"
+              onclick="removeFromCart(${index})"
+            >
+              ✕
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+
+    cartTotal.textContent = total;
+
+  }
+
+
+  // ===============================
+  // PLUS
+  // ===============================
+
+  function increaseQuantity(index) {
+
+    if (cart[index]) {
+
+      cart[index].quantity++;
+
+    }
+
+    updateCart();
+
+  }
+
+
+  // ===============================
+  // MINUS
+  // ===============================
+
+  function decreaseQuantity(index) {
+
+    if (!cart[index]) {
+      return;
+    }
+
+    cart[index].quantity--;
+
+
+    if (cart[index].quantity <= 0) {
+
+      cart.splice(index, 1);
+
+    }
+
+
+    updateCart();
+
+  }
+
+
+  // ===============================
+  // REMOVE
+  // ===============================
+
+  function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+  }
+
+
+  // ===============================
+  // SEARCH + CATEGORY
+  // ===============================
+
+  function filterProducts() {
+
+    const search =
+      document.getElementById("productSearch");
+
+    const category =
+      document.getElementById("c
