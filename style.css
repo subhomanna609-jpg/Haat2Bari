@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -16,23 +20,31 @@ a {
   color: inherit;
 }
 
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* CONTAINER */
 .container {
   width: 92%;
   max-width: 1150px;
-  margin: auto;
+  margin: 0 auto;
 }
 
-/* Header */
+/* HEADER */
 .header {
-  background: white;
+  background: #ffffff;
   border-bottom: 1px solid #e5e5e5;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .nav {
-  min-height: 75px;
+  min-height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,6 +56,7 @@ a {
   gap: 10px;
   font-size: 24px;
   font-weight: bold;
+  color: #087f3e;
 }
 
 .brand img {
@@ -54,15 +67,15 @@ a {
 
 .nav-btn {
   background: #087f3e;
-  color: white;
+  color: #ffffff;
   padding: 10px 18px;
   border-radius: 25px;
   font-weight: bold;
 }
 
-/* Hero */
+/* HERO */
 .hero {
-  padding: 70px 0;
+  padding: 65px 0;
   background: linear-gradient(135deg, #effbea, #ffffff);
 }
 
@@ -77,7 +90,7 @@ a {
   display: inline-block;
   background: #e0f4e5;
   color: #087f3e;
-  padding: 8px 14px;
+  padding: 7px 14px;
   border-radius: 20px;
   margin-bottom: 15px;
   font-weight: bold;
@@ -86,12 +99,13 @@ a {
 .hero h1 {
   font-size: 48px;
   line-height: 1.15;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  color: #123b24;
 }
 
-.hero p {
+.hero > .container > .hero-grid > div > p {
   font-size: 17px;
-  color: #555;
+  color: #555555;
   margin-bottom: 20px;
 }
 
@@ -113,31 +127,33 @@ a {
 
 .primary {
   background: #087f3e;
-  color: white;
+  color: #ffffff;
 }
 
 .secondary {
-  background: white;
+  background: #ffffff;
   color: #087f3e;
   border: 1px solid #087f3e;
 }
 
 .hero-card {
-  background: white;
+  background: #ffffff;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .hero-card h3 {
   margin-bottom: 5px;
+  color: #087f3e;
 }
 
 .hero-card p {
+  color: #666666;
   margin-bottom: 20px;
 }
 
-/* Sections */
+/* SECTIONS */
 .section {
   padding: 60px 0;
 }
@@ -150,13 +166,14 @@ a {
 .section-title h2 {
   font-size: 32px;
   margin-bottom: 8px;
+  color: #123b24;
 }
 
 .section-title p {
-  color: #666;
+  color: #666666;
 }
 
-/* Products */
+/* PRODUCTS */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -164,11 +181,11 @@ a {
 }
 
 .product-card {
-  background: #fff;
+  background: #ffffff;
   padding: 20px;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   transition: 0.2s;
 }
 
@@ -178,29 +195,29 @@ a {
 
 .product-icon {
   font-size: 42px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .product-card h3 {
-  margin: 8px 0;
+  margin: 6px 0;
   font-size: 18px;
 }
 
 .product-card p {
-  margin: 5px 0;
-  color: #666;
+  margin: 4px 0;
+  color: #666666;
 }
 
 .product-price {
   font-size: 20px;
   font-weight: bold;
-  margin: 10px 0;
+  margin: 9px 0;
   color: #087f3e;
 }
 
 .add-cart {
   background: #087f3e;
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 9px 14px;
   border-radius: 8px;
@@ -212,13 +229,13 @@ a {
   background: #056331;
 }
 
-/* Cart */
+/* CART */
 .cart-box {
-  background: white;
+  background: #ffffff;
   margin-top: 35px;
   padding: 25px;
   border-radius: 18px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .cart-box h2 {
@@ -227,13 +244,14 @@ a {
 
 .cart-box h3 {
   margin: 20px 0;
+  color: #087f3e;
 }
 
 #cartItems {
-  color: #555;
+  color: #555555;
 }
 
-/* How it works */
+/* HOW IT WORKS */
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -241,11 +259,11 @@ a {
 }
 
 .card {
-  background: white;
+  background: #ffffff;
   padding: 25px;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
 }
 
 .icon {
@@ -258,10 +276,10 @@ a {
 }
 
 .card p {
-  color: #666;
+  color: #666666;
 }
 
-/* Order */
+/* ORDER */
 .order-section {
   background: #eef8f0;
 }
@@ -269,10 +287,10 @@ a {
 .order-form {
   max-width: 650px;
   margin: auto;
-  background: white;
+  background: #ffffff;
   padding: 25px;
   border-radius: 18px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
 }
 
 .order-form label {
@@ -287,7 +305,7 @@ a {
   width: 100%;
   padding: 12px;
   margin-top: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   border-radius: 8px;
   font-size: 15px;
 }
@@ -301,21 +319,21 @@ a {
   width: 100%;
 }
 
-/* Contact */
+/* CONTACT */
 .contact {
   padding-top: 30px;
 }
 
 .contact-box {
   text-align: center;
-  background: white;
+  background: #ffffff;
   padding: 35px;
   border-radius: 18px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
 }
 
 .contact-box p {
-  color: #666;
+  color: #666666;
   margin: 10px 0 20px;
 }
 
@@ -325,20 +343,25 @@ a {
   gap: 12px;
 }
 
-/* Footer */
+/* FOOTER */
 .footer {
   background: #123b24;
-  color: white;
+  color: #ffffff;
   text-align: center;
   padding: 25px;
   margin-top: 30px;
 }
 
-/* Mobile */
+/* MOBILE */
 @media (max-width: 800px) {
+
+  .hero {
+    padding: 45px 0;
+  }
 
   .hero-grid {
     grid-template-columns: 1fr;
+    gap: 25px;
   }
 
   .hero h1 {
@@ -368,18 +391,66 @@ a {
   }
 }
 
+/* SMALL MOBILE */
 @media (max-width: 450px) {
+
+  .container {
+    width: 94%;
+  }
+
+  .nav {
+    min-height: 65px;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  .brand img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .nav-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .section {
+    padding: 45px 0;
+  }
+
+  .section-title h2 {
+    font-size: 27px;
+  }
 
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .product-card {
+    padding: 12px 8px;
+  }
+
+  .product-icon {
+    font-size: 32px;
   }
 
   .product-card h3 {
     font-size: 15px;
   }
 
-  .product-icon {
-    font-size: 34px;
+  .product-card p {
+    font-size: 13px;
   }
 
   .product-price {
@@ -388,6 +459,14 @@ a {
 
   .add-cart {
     font-size: 12px;
-    padding: 8px 9px;
+    padding: 8px 8px;
+  }
+
+  .hero-card {
+    padding: 20px;
+  }
+
+  .order-form {
+    padding: 18px;
   }
 }
