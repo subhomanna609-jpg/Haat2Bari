@@ -97,6 +97,54 @@
   </section>
 
 
+  <!-- DELIVERY AREA -->
+  <section class="section" id="delivery">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>🚚 Delivery Area & Charge</h2>
+
+        <p>
+          আমাদের বর্তমান Delivery এলাকাগুলি
+        </p>
+
+      </div>
+
+
+      <div class="card" style="max-width:850px;margin:0 auto;text-align:left;">
+
+        <p>
+          <strong>📍 Delivery Areas:</strong>
+        </p>
+
+        <p>
+          Jamalpur • Chakdighi • Harogovindapur • Surekalna
+          • South Sura • Monirambati • Dashghara
+        </p>
+
+        <p>
+          <strong>💰 Delivery Charge:</strong>
+        </p>
+
+        <p>
+          🟢 5 km-এর মধ্যে — <strong>FREE</strong>
+          <br>
+          🟠 5 km-এর বেশি — <strong>₹20</strong>
+        </p>
+
+        <p style="margin-bottom:0;">
+          📌 Delivery availability আপনার ঠিকানা অনুযায়ী confirm করা হবে।
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
   <!-- SHOP -->
   <section class="section" id="shop">
 
@@ -408,7 +456,6 @@
 
       <div class="owner-card">
 
-        <!-- OWNER PHOTO -->
         <img
           src="owner-photo.jpg?v=1"
           alt="Subho Manna - Founder & Owner"
@@ -489,7 +536,7 @@
           <input
             type="text"
             id="area"
-            placeholder="আপনার এলাকা"
+            placeholder="যেমন: Jamalpur"
             required
           >
         </label>
@@ -503,15 +550,57 @@
           ></textarea>
         </label>
 
+
+        <!-- DELIVERY DISTANCE -->
+        <label>
+          Delivery Distance
+
+          <select
+            id="deliveryDistance"
+            onchange="updateDeliveryCharge()"
+          >
+
+            <option value="0">
+              5 km-এর মধ্যে — FREE
+            </option>
+
+            <option value="20">
+              5 km-এর বেশি — ₹20
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <!-- DELIVERY CHARGE -->
+        <label>
+          Delivery Charge
+
+          <input
+            type="text"
+            id="deliveryCharge"
+            value="₹0"
+            readonly
+          >
+
+        </label>
+
+
+        <!-- PRODUCTS -->
         <label>
           Products
+
           <textarea
             id="productsInput"
             placeholder="Cart থেকে Product এখানে আসবে"
             readonly
           ></textarea>
+
         </label>
 
+
+        <!-- PAYMENT -->
         <label>
           Payment
 
@@ -529,6 +618,8 @@
 
         </label>
 
+
+        <!-- NOTE -->
         <label>
           Note
 
@@ -538,6 +629,7 @@
           ></textarea>
 
         </label>
+
 
         <button
           type="submit"
@@ -608,6 +700,186 @@
 
   <!-- JAVASCRIPT -->
   <script src="script.js?v=4"></script>
+
+
+  <!-- DELIVERY + WHATSAPP ORDER SYSTEM -->
+  <script>
+
+    function updateDeliveryCharge() {
+
+      const select = document.getElementById("deliveryDistance");
+      const chargeInput = document.getElementById("deliveryCharge");
+
+      if (!select || !chargeInput) return;
+
+      const charge = Number(select.value) || 0;
+
+      chargeInput.value = "₹" + charge;
+    }
+
+
+    function goToOrder() {
+
+      if (typeof cart === "undefined" || cart.length === 0) {
+
+        alert("প্রথমে Cart-এ Product যোগ করুন।");
+
+        return;
+      }
+
+
+      const productsText = cart
+        .map(item =>
+          `${item.name} × ${item.quantity} = ₹${item.price * item.quantity}`
+        )
+        .join("\n");
+
+
+      const productsInput =
+        document.getElementById("productsInput");
+
+      if (productsInput) {
+
+        productsInput.value = productsText;
+
+      }
+
+
+      updateDeliveryCharge();
+
+
+      const orderSection =
+        document.getElementById("order");
+
+      if (orderSection) {
+
+        orderSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    }
+
+
+    function submitOrder(event) {
+
+      event.preventDefault();
+
+
+      if (typeof cart === "undefined" || cart.length === 0) {
+
+        alert("প্রথমে Cart-এ Product যোগ করুন।");
+
+        return;
+      }
+
+
+      const name =
+        document.getElementById("name")?.value.trim() || "";
+
+
+      const phone =
+        document.getElementById("phone")?.value.trim() || "";
+
+
+      const area =
+        document.getElementById("area")?.value.trim() || "";
+
+
+      const address =
+        document.getElementById("address")?.value.trim() || "";
+
+
+      const payment =
+        document.getElementById("payment")?.value ||
+        "Cash on Delivery";
+
+
+      const note =
+        document.getElementById("note")?.value.trim() || "";
+
+
+      const deliveryDistance =
+        document.getElementById("deliveryDistance")?.value ||
+        "0";
+
+
+      const deliveryCharge =
+        Number(deliveryDistance) || 0;
+
+
+      const products = cart
+        .map(item =>
+          `${item.name} × ${item.quantity} = ₹${item.price * item.quantity}`
+        )
+        .join("\n");
+
+
+      const productsTotal =
+        cart.reduce(
+          (sum, item) =>
+            sum + item.price * item.quantity,
+          0
+        );
+
+
+      const grandTotal =
+        productsTotal + deliveryCharge;
+
+
+      const message = `🛒 *New Haat2Bari Order*
+
+👤 Name: ${name}
+
+📞 Mobile: ${phone}
+
+📍 Area: ${area}
+
+🏠 Address:
+${address}
+
+🛍️ Products:
+${products}
+
+💰 Products Total: ₹${productsTotal}
+
+🚚 Delivery Charge: ₹${deliveryCharge}
+
+💵 Grand Total: ₹${grandTotal}
+
+💳 Payment: ${payment}
+
+📝 Note:
+${note || "None"}
+
+Please confirm my order.`;
+
+
+      const whatsappURL =
+        "https://wa.me/919832495276?text=" +
+        encodeURIComponent(message);
+
+
+      window.open(
+        whatsappURL,
+        "_blank"
+      );
+
+    }
+
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        updateDeliveryCharge();
+
+      }
+    );
+
+  </script>
 
 </body>
 
