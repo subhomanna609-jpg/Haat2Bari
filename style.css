@@ -166,7 +166,7 @@ select {
   background: #eaf8ef;
 }
 
-/* HERO CARD */
+/* ================= HERO CARD ================= */
 
 .hero-card {
   background: rgba(255,255,255,0.92);
@@ -259,7 +259,7 @@ select {
   box-shadow: 0 14px 32px rgba(0,0,0,0.10);
 }
 
-/* PRODUCT IMAGE */
+/* ================= PRODUCT IMAGE ================= */
 
 .product-image {
   width: 100%;
@@ -414,6 +414,96 @@ select {
   color: #6a746e;
 }
 
+/* ================= OWNER SECTION ================= */
+
+.owner-section {
+  background:
+    linear-gradient(135deg, #f2fff6, #ffffff);
+}
+
+.owner-card {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 35px;
+
+  background: #ffffff;
+
+  border: 1px solid #e3ebe5;
+  border-radius: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 35px;
+
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+
+  transition: 0.25s;
+}
+
+.owner-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+}
+
+.owner-photo {
+  width: 180px;
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 5px solid #07833f;
+
+  flex-shrink: 0;
+
+  background: #f5f7f6;
+
+  box-shadow: 0 8px 25px rgba(7,131,63,0.18);
+}
+
+.owner-info {
+  text-align: left;
+}
+
+.owner-label {
+  display: inline-block;
+
+  background: #e1f6e8;
+
+  color: #07833f;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  margin-bottom: 8px;
+}
+
+.owner-info h2 {
+  margin: 5px 0;
+
+  font-size: 34px;
+
+  color: #123b24;
+}
+
+.owner-info p {
+  margin: 7px 0;
+
+  color: #183b27;
+}
+
+.owner-text {
+  color: #6a746e !important;
+
+  font-size: 16px;
+}
+
 /* ================= ORDER ================= */
 
 .order-section {
@@ -527,6 +617,10 @@ select {
   .steps {
     grid-template-columns: 1fr;
   }
+
+  .owner-card {
+    max-width: 750px;
+  }
 }
 
 /* ================= MOBILE ================= */
@@ -627,6 +721,35 @@ select {
   .hero-card {
     padding: 23px;
   }
+
+  /* OWNER MOBILE */
+
+  .owner-card {
+    flex-direction: column;
+    text-align: center;
+
+    padding: 28px 20px;
+
+    gap: 20px;
+  }
+
+  .owner-photo {
+    width: 145px;
+    height: 145px;
+  }
+
+  .owner-info {
+    text-align: center;
+  }
+
+  .owner-info h2 {
+    font-size: 27px;
+  }
+
+  .owner-text {
+    font-size: 14px;
+  }
+
 }
 
 /* ================= SMALL MOBILE ================= */
@@ -652,4 +775,14 @@ select {
   .hero h1 {
     font-size: 30px;
   }
+
+  .owner-photo {
+    width: 130px;
+    height: 130px;
+  }
+
+  .owner-info h2 {
+    font-size: 24px;
+  }
+
 }
