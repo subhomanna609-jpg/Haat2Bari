@@ -1,6 +1,7 @@
 // =========================================
 // HAAT2BARI
 // PROFESSIONAL CART + SEARCH + CATEGORY
+// ORDER ID + DELIVERY + WHATSAPP
 // =========================================
 
 const WHATSAPP_NUMBER = "919832495276";
@@ -77,7 +78,8 @@ function updateCart() {
 
     total += itemTotal;
 
-    const cartItem = document.createElement("div");
+    const cartItem =
+      document.createElement("div");
 
     cartItem.className = "cart-item";
 
@@ -214,26 +216,60 @@ function filterProducts() {
       product.dataset.category || "";
 
     const matchesSearch =
+      searchText === "" ||
       name.includes(searchText);
 
     const matchesCategory =
       selectedCategory === "all" ||
       category === selectedCategory;
 
-    if (
-      matchesSearch &&
-      matchesCategory
-    ) {
-
-      product.style.display = "";
-
-    } else {
-
-      product.style.display = "none";
-
-    }
+    product.style.display =
+      matchesSearch && matchesCategory
+        ? ""
+        : "none";
 
   });
+}
+
+
+// =========================================
+// DELIVERY CHARGE
+// =========================================
+
+function getDeliveryCharge() {
+
+  const deliverySelect =
+    document.getElementById("deliveryDistance");
+
+  if (!deliverySelect) {
+    return 0;
+  }
+
+  return Number(deliverySelect.value) || 0;
+}
+
+
+// =========================================
+// UPDATE DELIVERY CHARGE
+// =========================================
+
+function updateDeliveryCharge() {
+
+  const select =
+    document.getElementById("deliveryDistance");
+
+  const chargeInput =
+    document.getElementById("deliveryCharge");
+
+  if (!select || !chargeInput) {
+    return;
+  }
+
+  const charge =
+    Number(select.value) || 0;
+
+  chargeInput.value =
+    "₹" + charge;
 }
 
 
@@ -272,6 +308,8 @@ function goToOrder() {
 
   }
 
+  updateDeliveryCharge();
+
   const order =
     document.getElementById("order");
 
@@ -283,6 +321,26 @@ function goToOrder() {
     });
 
   }
+}
+
+
+// =========================================
+// CREATE ORDER ID
+// =========================================
+
+function createOrderID() {
+
+  const now = new Date();
+
+  const date =
+    now.getFullYear().toString() +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    String(now.getDate()).padStart(2, "0");
+
+  const random =
+    Math.floor(1000 + Math.random() * 9000);
+
+  return "HB-" + date + "-" + random;
 }
 
 
@@ -302,6 +360,7 @@ function submitOrder(event) {
 
     return;
   }
+
 
   const name =
     document.getElementById("name")?.value.trim() || "";
@@ -323,6 +382,13 @@ function submitOrder(event) {
     document.getElementById("note")?.value.trim() ||
     "None";
 
+
+  // DELIVERY
+  const deliveryCharge =
+    getDeliveryCharge();
+
+
+  // PRODUCTS
   const products =
     cart.map(function(item) {
 
@@ -336,7 +402,9 @@ function submitOrder(event) {
 
     }).join("\n");
 
-  const total =
+
+  // PRODUCT TOTAL
+  const productsTotal =
     cart.reduce(function(sum, item) {
 
       return sum +
@@ -344,8 +412,23 @@ function submitOrder(event) {
 
     }, 0);
 
+
+  // GRAND TOTAL
+  const grandTotal =
+    productsTotal +
+    deliveryCharge;
+
+
+  // ORDER ID
+  const orderID =
+    createOrderID();
+
+
+  // WHATSAPP MESSAGE
   const message =
 `🛒 *New Haat2Bari Order*
+
+🆔 Order ID: ${orderID}
 
 👤 Name: ${name}
 
@@ -359,7 +442,11 @@ ${address}
 🛍️ Products:
 ${products}
 
-💰 Total: ₹${total}
+💰 Products Total: ₹${productsTotal}
+
+🚚 Delivery Charge: ₹${deliveryCharge}
+
+💵 *Grand Total: ₹${grandTotal}*
 
 💳 Payment: ${payment}
 
@@ -368,16 +455,34 @@ ${note}
 
 Please confirm my order.`;
 
+
   const whatsappURL =
     "https://wa.me/" +
     WHATSAPP_NUMBER +
     "?text=" +
     encodeURIComponent(message);
 
+
+  // OPEN WHATSAPP
   window.open(
     whatsappURL,
     "_blank"
   );
+
+
+  // CUSTOMER CONFIRMATION
+  setTimeout(function() {
+
+    alert(
+      "✅ Order Ready!\n\n" +
+      "Order ID: " + orderID +
+      "\n\n" +
+      "WhatsApp-এ আপনার Order পাঠানো হয়েছে।\n" +
+      "Grand Total: ₹" + grandTotal
+    );
+
+  }, 800);
+
 }
 
 
@@ -391,11 +496,15 @@ document.addEventListener(
 
     updateCart();
 
+    updateDeliveryCharge();
+
+
     const search =
       document.getElementById("productSearch");
 
     const category =
       document.getElementById("categoryFilter");
+
 
     if (search) {
 
@@ -405,6 +514,7 @@ document.addEventListener(
       );
 
     }
+
 
     if (category) {
 
