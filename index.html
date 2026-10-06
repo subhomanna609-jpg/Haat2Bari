@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haat2Bari | Grocery Delivery</title>
+  <meta name="description" content="Haat2Bari - হাটের বাজার, এবার আপনার বাড়ির দ্বার।">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#home">
+        <img src="assets/logo.png" alt="Haat2Bari Logo">
+        <span>Haat2Bari</span>
+      </a>
+      <a class="nav-btn" href="#order">Order Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="pill">🛒 Local Grocery Delivery</span>
+          <h1>হাটের বাজার,<br><span>এবার আপনার বাড়ির দ্বার।</span></h1>
+          <p>প্রয়োজনীয় grocery পণ্য সহজে order করুন। আমরা order confirm করে আপনার নির্ধারিত ঠিকানায় delivery দেব।</p>
+          <div class="hero-actions">
+            <a class="primary" href="#order">🛒 Order Now</a>
+            <a class="secondary" href="#products">Products দেখুন</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img src="assets/logo.png" alt="Haat2Bari">
+          <p>Simple • Local • Convenient</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <div class="container">
+        <div class="section-title">
+          <span>Our Products</span>
+          <h2>দৈনন্দিন প্রয়োজনের বাজার</h2>
+        </div>
+        <div class="cards">
+          <div class="card"><div class="icon">🌾</div><h3>চাল ও ডাল</h3><p>Rice, Masoor Dal, Moong Dal, Chana Dal</p></div>
+          <div class="card"><div class="icon">🫗</div><h3>তেল ও মশলা</h3><p>Mustard Oil, Soybean Oil, Salt, Sugar, Spices</p></div>
+          <div class="card"><div class="icon">🍪</div><h3>Snacks</h3><p>Biscuit, Chips, Noodles, Chanachur</p></div>
+          <div class="card"><div class="icon">🧼</div><h3>Personal Care</h3><p>Soap, Shampoo, Toothpaste, Toothbrush</p></div>
+          <div class="card"><div class="icon">🧹</div><h3>Household</h3><p>Detergent, Dishwash, Washing Soap</p></div>
+          <div class="card"><div class="icon">🥤</div><h3>Drinks & More</h3><p>Water, Soft Drinks and other daily-use items</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how section">
+      <div class="container">
+        <div class="section-title">
+          <span>How It Works</span>
+          <h2>মাত্র ৪টি ধাপে Order</h2>
+        </div>
+        <div class="steps">
+          <div><b>01</b><h3>পণ্য বাছুন</h3><p>নিচের order form-এ আপনার প্রয়োজনীয় পণ্য লিখুন।</p></div>
+          <div><b>02</b><h3>ঠিকানা দিন</h3><p>নাম, মোবাইল ও delivery address দিন।</p></div>
+          <div><b>03</b><h3>Order Confirm</h3><p>আমরা ফোন/WhatsApp-এ order confirm করব।</p></div>
+          <div><b>04</b><h3>বাড়িতে Delivery</h3><p>আপনার নির্ধারিত ঠিকানায় বাজার পৌঁছে যাবে।</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="order" class="section order-section">
+      <div class="container order-grid">
+        <div>
+          <div class="section-title left">
+            <span>Order Now</span>
+            <h2>বাজারের Order দিন</h2>
+          </div>
+          <p>Form পূরণ করে “Send Order on WhatsApp” চাপুন। WhatsApp খুলে গেলে message পাঠিয়ে দিন।</p>
+          <div class="note">💡 WhatsApp নম্বরটি <code>script.js</code>-এ আপনার business number দিয়ে বদলাতে হবে।</div>
+        </div>
+
+        <form id="orderForm" class="order-form">
+          <label>Customer Name<input id="name" required placeholder="আপনার নাম"></label>
+          <label>Mobile Number<input id="phone" required inputmode="tel" placeholder="10 digit mobile number"></label>
+          <label>Village / Area<input id="area" required placeholder="গ্রাম / এলাকা"></label>
+          <label>Delivery Address<textarea id="address" required placeholder="বাড়ির ঠিকানা"></textarea></label>
+          <label>Products & Quantity<textarea id="productsInput" required placeholder="যেমন: Rice 5kg, Mustard Oil 1L, Biscuit 2 packet"></textarea></label>
+          <label>Payment Method
+            <select id="payment">
+              <option>Cash on Delivery</option>
+              <option>UPI</option>
+            </select>
+          </label>
+          <label>Additional Note<textarea id="note" placeholder="কোনও অতিরিক্ত কথা থাকলে লিখুন"></textarea></label>
+          <button class="primary full" type="submit">📲 Send Order on WhatsApp</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="contact section">
+      <div class="container contact-box">
+        <div>
+          <span>Contact</span>
+          <h2>Haat2Bari</h2>
+          <p>আপনার local grocery delivery service.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="secondary" href="tel:+910000000000">📞 Call</a>
+          <a class="primary" href="#order">🛒 Order Now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer">
+      <strong>Haat2Bari</strong>
+      <span>© 2026 Haat2Bari. All rights reserved.</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

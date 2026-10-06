@@ -1,0 +1,49 @@
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#08783d;--dark:#064f2b;--orange:#ff7a00;--light:#f5fbf7;--text:#173126}
+html{scroll-behavior:smooth}
+body{font-family:Arial,"Noto Sans Bengali",sans-serif;color:var(--text);background:#fff;line-height:1.6}
+.container{width:min(1120px,92%);margin:auto}
+.header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid #e8eee9}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--dark);font-weight:800;font-size:22px}
+.brand img{width:48px;height:48px;object-fit:contain;border-radius:50%}
+.nav-btn,.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:12px;padding:12px 20px;font-weight:700}
+.nav-btn,.primary{background:var(--green);color:#fff}
+.secondary{border:1px solid #cfe1d6;color:var(--dark);background:#fff}
+.hero{background:linear-gradient(135deg,#f1fbf5,#fff7ee);padding:72px 0}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}
+.pill{display:inline-block;background:#e0f3e7;color:var(--green);padding:7px 13px;border-radius:99px;font-size:14px;font-weight:700}
+h1{font-size:clamp(40px,6vw,70px);line-height:1.08;margin:20px 0;color:var(--dark)}
+h1 span{color:var(--orange)}
+.hero p{font-size:18px;max-width:650px;color:#53675c}
+.hero-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.hero-card{background:#fff;border-radius:28px;padding:25px;text-align:center;box-shadow:0 20px 60px rgba(0,70,35,.12)}
+.hero-card img{width:100%;max-width:380px}
+.hero-card p{font-size:14px;margin-top:10px}
+.section{padding:75px 0}
+.section-title{text-align:center;margin-bottom:38px}
+.section-title.left{text-align:left}
+.section-title span{color:var(--orange);font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:13px}
+.section-title h2{font-size:36px;color:var(--dark);margin-top:6px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:26px;background:#fff;border:1px solid #e5eee8;border-radius:20px;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,0,0,.07)}
+.icon{font-size:34px;margin-bottom:8px}.card h3{color:var(--dark);margin-bottom:5px}.card p{color:#64766c;font-size:14px}
+.how{background:var(--light)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.steps>div{background:#fff;padding:25px;border-radius:18px;border:1px solid #e0ebe4}
+.steps b{color:var(--orange);font-size:24px}.steps h3{margin:8px 0 4px;color:var(--dark)}.steps p{font-size:14px;color:#64766c}
+.order-section{background:#fff7ee}
+.order-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:start}
+.note{margin-top:22px;background:#fff;border-left:4px solid var(--orange);padding:15px;border-radius:10px;font-size:14px}
+.order-form{background:#fff;padding:28px;border-radius:22px;box-shadow:0 15px 45px rgba(100,70,30,.08)}
+label{display:block;font-weight:700;margin-bottom:15px;color:var(--dark)}
+input,textarea,select{width:100%;margin-top:6px;border:1px solid #d9e4dd;border-radius:10px;padding:13px;font:inherit;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--green)}
+textarea{min-height:90px;resize:vertical}.full{width:100%;border:0;cursor:pointer;font:inherit}
+.contact-box{background:var(--dark);color:#fff;padding:38px;border-radius:25px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.contact-box span{color:#ffb46b;font-weight:800}.contact-box h2{font-size:35px}.contact-box p{opacity:.8}
+.contact-actions{display:flex;gap:10px;flex-wrap:wrap}.contact-actions .secondary{color:var(--dark)}
+footer{background:#03351d;color:#cfe2d6;padding:22px 0}.footer{display:flex;justify-content:space-between;gap:15px;font-size:13px}
+@media(max-width:800px){.hero-grid,.order-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.hero{padding:50px 0}.section{padding:55px 0}}
+@media(max-width:520px){.cards,.steps{grid-template-columns:1fr}.nav-btn{padding:9px 13px;font-size:14px}.brand span{font-size:19px}h1{font-size:42px}.contact-box,.footer{flex-direction:column;align-items:flex-start}}
