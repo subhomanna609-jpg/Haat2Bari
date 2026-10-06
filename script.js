@@ -1,53 +1,61 @@
-// ===============================
-// Haat2Bari Cart & WhatsApp
-// ===============================
+// =====================================
+// Haat2Bari Cart & WhatsApp Order
+// =====================================
 
-// Your WhatsApp number
 const WHATSAPP_NUMBER = "919832495276";
 
-// Cart
 let cart = [];
 
 
-// ===============================
+// =====================================
 // ADD TO CART
-// ===============================
+// =====================================
 
 function addToCart(name, price) {
 
   const existingProduct = cart.find(item => item.name === name);
 
   if (existingProduct) {
-    existingProduct.quantity++;
+    existingProduct.quantity += 1;
   } else {
     cart.push({
       name: name,
-      price: price,
+      price: Number(price),
       quantity: 1
     });
   }
 
   updateCart();
 
-  // Scroll to cart
-  document.getElementById("cart").scrollIntoView({
-    behavior: "smooth"
-  });
+  const cartSection = document.getElementById("cart");
+
+  if (cartSection) {
+    cartSection.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
 }
 
 
-// ===============================
+// =====================================
 // UPDATE CART
-// ===============================
+// =====================================
 
 function updateCart() {
 
   const cartItems = document.getElementById("cartItems");
   const cartTotal = document.getElementById("cartTotal");
 
+  if (!cartItems || !cartTotal) {
+    return;
+  }
+
   if (cart.length === 0) {
 
-    cartItems.innerHTML = "<p>আপনার Cart এখনো খালি।</p>";
+    cartItems.innerHTML = `
+      <p>আপনার Cart এখনো খালি।</p>
+    `;
+
     cartTotal.textContent = "0";
 
     return;
@@ -64,14 +72,7 @@ function updateCart() {
     total += itemTotal;
 
     cartItems.innerHTML += `
-      <div class="cart-item" style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        gap:10px;
-        padding:12px 0;
-        border-bottom:1px solid #eee;
-      ">
+      <div class="cart-item">
 
         <div>
           <strong>${item.name}</strong>
@@ -80,23 +81,30 @@ function updateCart() {
           = ₹${itemTotal}
         </div>
 
-        <div style="display:flex;align-items:center;gap:6px;">
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:6px;
+        ">
 
-          <button onclick="decreaseQuantity(${index})"
+          <button
+            onclick="decreaseQuantity(${index})"
             style="
               width:32px;
               height:32px;
               border:none;
               border-radius:6px;
-              background:#eee;
+              background:#eeeeee;
               cursor:pointer;
+              font-size:18px;
             ">
             −
           </button>
 
           <strong>${item.quantity}</strong>
 
-          <button onclick="increaseQuantity(${index})"
+          <button
+            onclick="increaseQuantity(${index})"
             style="
               width:32px;
               height:32px;
@@ -105,15 +113,17 @@ function updateCart() {
               background:#087f3e;
               color:white;
               cursor:pointer;
+              font-size:18px;
             ">
             +
           </button>
 
-          <button onclick="removeFromCart(${index})"
+          <button
+            onclick="removeFromCart(${index})"
             style="
               border:none;
               background:#ffe5e5;
-              color:#d00;
+              color:#d00000;
               padding:6px 8px;
               border-radius:6px;
               cursor:pointer;
@@ -131,25 +141,31 @@ function updateCart() {
 }
 
 
-// ===============================
+// =====================================
 // INCREASE QUANTITY
-// ===============================
+// =====================================
 
 function increaseQuantity(index) {
 
-  cart[index].quantity++;
+  if (cart[index]) {
+    cart[index].quantity += 1;
+  }
 
   updateCart();
 }
 
 
-// ===============================
+// =====================================
 // DECREASE QUANTITY
-// ===============================
+// =====================================
 
 function decreaseQuantity(index) {
 
-  cart[index].quantity--;
+  if (!cart[index]) {
+    return;
+  }
+
+  cart[index].quantity -= 1;
 
   if (cart[index].quantity <= 0) {
     cart.splice(index, 1);
@@ -159,21 +175,66 @@ function decreaseQuantity(index) {
 }
 
 
-// ===============================
+// =====================================
 // REMOVE PRODUCT
-// ===============================
+// =====================================
 
 function removeFromCart(index) {
 
-  cart.splice(index, 1);
+  if (cart[index]) {
+    cart.splice(index, 1);
+  }
 
   updateCart();
 }
 
 
-// ===============================
+// =====================================
+// CREATE PRODUCT TEXT FROM CART
+// =====================================
+
+function getCartProducts() {
+
+  if (cart.length === 0) {
+    return "";
+  }
+
+  let productsText = "";
+
+  cart.forEach(item => {
+
+    const itemTotal = item.price * item.quantity;
+
+    productsText +=
+      `${item.name} × ${item.quantity} = ₹${itemTotal}\n`;
+
+  });
+
+  return productsText.trim();
+}
+
+
+// =====================================
+// GET CART TOTAL
+// =====================================
+
+function getCartTotal() {
+
+  let total = 0;
+
+  cart.forEach(item => {
+
+    total += item.price * item.quantity;
+
+  });
+
+  return total;
+}
+
+
+// =====================================
 // GO TO ORDER
-// ===============================
+// =====================================
 
 function goToOrder() {
 
@@ -184,78 +245,108 @@ function goToOrder() {
     return;
   }
 
-  let productsText = "";
+  const productsText = getCartProducts();
 
-  cart.forEach(item => {
+  const productsInput =
+    document.getElementById("productsInput");
 
-    productsText +=
-      `${item.name} × ${item.quantity} = ₹${item.price * item.quantity}\n`;
+  if (productsInput) {
+    productsInput.value = productsText;
+  }
 
-  });
+  const orderSection =
+    document.getElementById("order");
 
-  document.getElementById("productsInput").value = productsText;
+  if (orderSection) {
 
-  document.getElementById("order").scrollIntoView({
-    behavior: "smooth"
-  });
+    orderSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
 }
 
 
-// ===============================
+// =====================================
 // WHATSAPP ORDER
-// ===============================
+// =====================================
 
-document.getElementById("orderForm").addEventListener("submit", function(e) {
+const orderForm = document.getElementById("orderForm");
 
-  e.preventDefault();
+if (orderForm) {
 
-  if (!WHATSAPP_NUMBER || WHATSAPP_NUMBER.includes("X")) {
+  orderForm.addEventListener("submit", function(e) {
 
-    alert("প্রথমে script.js ফাইলে আপনার WhatsApp number বসান।");
+    e.preventDefault();
 
-    return;
-  }
+    // Check WhatsApp number
+    if (
+      !WHATSAPP_NUMBER ||
+      WHATSAPP_NUMBER.includes("X")
+    ) {
 
-  const name =
-    document.getElementById("name").value.trim();
+      alert("WhatsApp number ঠিক করুন।");
 
-  const phone =
-    document.getElementById("phone").value.trim();
-
-  const area =
-    document.getElementById("area").value.trim();
-
-  const address =
-    document.getElementById("address").value.trim();
-
-  const products =
-    document.getElementById("productsInput").value.trim();
-
-  const payment =
-    document.getElementById("payment").value;
-
-  const note =
-    document.getElementById("note").value.trim();
+      return;
+    }
 
 
-  if (!products) {
+    // Customer information
+    const name =
+      document.getElementById("name").value.trim();
 
-    alert("প্রথমে Cart-এ Product যোগ করুন।");
+    const phone =
+      document.getElementById("phone").value.trim();
 
-    return;
-  }
+    const area =
+      document.getElementById("area").value.trim();
+
+    const address =
+      document.getElementById("address").value.trim();
+
+    const payment =
+      document.getElementById("payment").value;
+
+    const note =
+      document.getElementById("note").value.trim();
 
 
-  let total = 0;
+    // =================================
+    // IMPORTANT:
+    // Products ALWAYS come from Cart
+    // =================================
 
-  cart.forEach(item => {
+    let products = getCartProducts();
 
-    total += item.price * item.quantity;
-
-  });
+    let total = getCartTotal();
 
 
-  const message =
+    // If Cart is empty, check manual input
+    if (!products) {
+
+      const productsInput =
+        document.getElementById("productsInput");
+
+      if (productsInput) {
+        products = productsInput.value.trim();
+      }
+    }
+
+
+    // No product = stop order
+    if (!products) {
+
+      alert("প্রথমে Cart-এ Product যোগ করুন।");
+
+      return;
+    }
+
+
+    // =================================
+    // WHATSAPP MESSAGE
+    // =================================
+
+    const message =
 `🛒 *New Haat2Bari Order*
 
 👤 Name: ${name}
@@ -280,10 +371,21 @@ ${note || "None"}
 Please confirm my order.`;
 
 
-  const url =
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    // WhatsApp URL
+    const whatsappURL =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
 
-  window.open(url, "_blank");
+    // Open WhatsApp
+    window.open(whatsappURL, "_blank");
 
-});
+  });
+
+}
+
+
+// =====================================
+// START CART
+// =====================================
+
+updateCart();
