@@ -1,6 +1,6 @@
 // CHANGE THIS to your own WhatsApp number with country code.
 // Example for India: 919876543210 (do not use + or spaces)
-const WHATSAPP_NUMBER = "919XXXXXXXXX";
+const WHATSAPP_NUMBER = "919832495276";
 
 document.getElementById("orderForm").addEventListener("submit", function(e){
   e.preventDefault();
