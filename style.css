@@ -1,5 +1,5 @@
 /* =========================================
-   HAAT2BARI - PROFESSIONAL DESIGN
+   HAAT2BARI - PROFESSIONAL FINAL DESIGN
    ========================================= */
 
 * {
@@ -31,6 +31,7 @@ select {
   font-family: inherit;
 }
 
+
 /* ================= CONTAINER ================= */
 
 .container {
@@ -38,6 +39,7 @@ select {
   max-width: 1180px;
   margin: auto;
 }
+
 
 /* ================= HEADER ================= */
 
@@ -85,6 +87,7 @@ select {
   background: #056a33;
   transform: translateY(-2px);
 }
+
 
 /* ================= HERO ================= */
 
@@ -166,6 +169,7 @@ select {
   background: #eaf8ef;
 }
 
+
 /* ================= HERO CARD ================= */
 
 .hero-card {
@@ -187,6 +191,7 @@ select {
   margin-bottom: 20px;
 }
 
+
 /* ================= SECTION ================= */
 
 .section {
@@ -207,6 +212,24 @@ select {
 .section-title p {
   color: #6a746e;
 }
+
+
+/* ================= DELIVERY ================= */
+
+.delivery-card {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.delivery-card p {
+  margin-bottom: 12px;
+}
+
+.delivery-card .last-text {
+  margin-bottom: 0;
+}
+
 
 /* ================= SHOP TOOLS ================= */
 
@@ -235,6 +258,7 @@ select {
   box-shadow: 0 0 0 3px rgba(8,131,63,0.08);
 }
 
+
 /* ================= PRODUCT GRID ================= */
 
 .product-grid {
@@ -259,8 +283,6 @@ select {
   box-shadow: 0 14px 32px rgba(0,0,0,0.10);
 }
 
-/* ================= PRODUCT IMAGE ================= */
-
 .product-image {
   width: 100%;
   height: 190px;
@@ -274,11 +296,6 @@ select {
 
 .product-card:hover .product-image {
   transform: scale(1.035);
-}
-
-.product-icon {
-  font-size: 42px;
-  margin-bottom: 8px;
 }
 
 .product-card h3 {
@@ -317,6 +334,21 @@ select {
   transform: translateY(-1px);
 }
 
+
+/* ================= NO PRODUCTS ================= */
+
+.no-products {
+  display: none;
+  background: white;
+  border: 1px solid #e7ece9;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  color: #6a746e;
+  margin-top: 10px;
+}
+
+
 /* ================= CART ================= */
 
 .cart-box {
@@ -328,14 +360,25 @@ select {
   box-shadow: 0 8px 28px rgba(0,0,0,0.06);
 }
 
-.cart-box h2 {
+.cart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
   margin-bottom: 18px;
+}
+
+.cart-box h2 {
   color: #123b24;
 }
 
-.cart-box h3 {
-  margin: 22px 0;
+#cartCount {
+  background: #e8f7ed;
   color: #07833f;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 #cartItems {
@@ -379,6 +422,26 @@ select {
   color: #d33;
 }
 
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid #e7ece9;
+  font-size: 18px;
+}
+
+.cart-total-row strong {
+  color: #07833f;
+  font-size: 22px;
+}
+
+.order-cart-btn {
+  margin-top: 20px;
+}
+
+
 /* ================= STEPS ================= */
 
 .steps {
@@ -414,7 +477,8 @@ select {
   color: #6a746e;
 }
 
-/* ================= OWNER SECTION ================= */
+
+/* ================= OWNER ================= */
 
 .owner-section {
   background:
@@ -425,40 +489,28 @@ select {
   max-width: 850px;
   margin: 0 auto;
   padding: 35px;
-
   background: #ffffff;
-
   border: 1px solid #e3ebe5;
   border-radius: 24px;
-
   display: flex;
   align-items: center;
   gap: 35px;
-
   box-shadow: 0 12px 35px rgba(0,0,0,0.08);
-
   transition: 0.25s;
 }
 
 .owner-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
 }
 
 .owner-photo {
   width: 180px;
   height: 180px;
-
   object-fit: cover;
-
   border-radius: 50%;
-
   border: 5px solid #07833f;
-
   flex-shrink: 0;
-
   background: #f5f7f6;
-
   box-shadow: 0 8px 25px rgba(7,131,63,0.18);
 }
 
@@ -468,41 +520,31 @@ select {
 
 .owner-label {
   display: inline-block;
-
   background: #e1f6e8;
-
   color: #07833f;
-
   padding: 6px 12px;
-
   border-radius: 20px;
-
   font-size: 14px;
-
   font-weight: 800;
-
   margin-bottom: 8px;
 }
 
 .owner-info h2 {
   margin: 5px 0;
-
   font-size: 34px;
-
   color: #123b24;
 }
 
 .owner-info p {
   margin: 7px 0;
-
   color: #183b27;
 }
 
 .owner-text {
   color: #6a746e !important;
-
   font-size: 16px;
 }
+
 
 /* ================= ORDER ================= */
 
@@ -556,6 +598,17 @@ select {
   width: 100%;
 }
 
+.order-id-box {
+  background: #e8f7ed;
+  color: #087f3e;
+  padding: 13px 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
+
 /* ================= CONTACT ================= */
 
 .contact {
@@ -583,6 +636,7 @@ select {
   flex-wrap: wrap;
 }
 
+
 /* ================= FOOTER ================= */
 
 .footer {
@@ -596,6 +650,7 @@ select {
 .footer p {
   opacity: 0.9;
 }
+
 
 /* ================= TABLET ================= */
 
@@ -622,6 +677,7 @@ select {
     max-width: 750px;
   }
 }
+
 
 /* ================= MOBILE ================= */
 
@@ -714,6 +770,10 @@ select {
     flex-direction: column;
   }
 
+  .cart-buttons {
+    width: 100%;
+  }
+
   .order-form {
     padding: 20px;
   }
@@ -722,14 +782,10 @@ select {
     padding: 23px;
   }
 
-  /* OWNER MOBILE */
-
   .owner-card {
     flex-direction: column;
     text-align: center;
-
     padding: 28px 20px;
-
     gap: 20px;
   }
 
@@ -751,6 +807,7 @@ select {
   }
 
 }
+
 
 /* ================= SMALL MOBILE ================= */
 
