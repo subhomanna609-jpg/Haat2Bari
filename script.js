@@ -1,6 +1,7 @@
 // =========================================
 // HAAT2BARI
 // FINAL PROFESSIONAL ORDER SYSTEM
+// + ADMIN PANEL ORDER STORAGE
 // =========================================
 
 const WHATSAPP_NUMBER = "919832495276";
@@ -586,6 +587,41 @@ function validateMobile(phone) {
 
 
 // =========================================
+// SAVE ORDER FOR ADMIN PANEL
+// =========================================
+
+function saveOrderForAdmin(orderData) {
+
+  let savedOrders = [];
+
+  try {
+
+    savedOrders =
+      JSON.parse(
+        localStorage.getItem(
+          "haat2bariOrders"
+        )
+      ) || [];
+
+  } catch (error) {
+
+    savedOrders = [];
+
+  }
+
+
+  savedOrders.unshift(orderData);
+
+
+  localStorage.setItem(
+    "haat2bariOrders",
+    JSON.stringify(savedOrders)
+  );
+
+}
+
+
+// =========================================
 // SUBMIT ORDER
 // =========================================
 
@@ -636,7 +672,23 @@ function submitOrder(event) {
       "None";
 
 
+  // =========================================
+  // REQUIRED FIELD CHECK
+  // =========================================
+
+  if (!name || !phone || !area || !address) {
+
+    alert(
+      "দয়া করে Name, Mobile, Area এবং Address পূরণ করুন।"
+    );
+
+    return;
+  }
+
+
+  // =========================================
   // MOBILE CHECK
+  // =========================================
 
   if (!validateMobile(phone)) {
 
@@ -652,7 +704,9 @@ function submitOrder(event) {
   }
 
 
+  // =========================================
   // TOTAL
+  // =========================================
 
   const deliveryCharge =
     getDeliveryCharge();
@@ -665,7 +719,9 @@ function submitOrder(event) {
     deliveryCharge;
 
 
+  // =========================================
   // PRODUCTS
+  // =========================================
 
   const products =
     cart.map(function(item) {
@@ -684,13 +740,72 @@ function submitOrder(event) {
     }).join("\n");
 
 
+  // =========================================
   // ORDER ID
+  // =========================================
 
   const orderID =
     createOrderID();
 
 
+  // =========================================
+  // DATE + TIME
+  // =========================================
+
+  const orderDate =
+    new Date().toLocaleString(
+      "en-IN",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    );
+
+
+  // =========================================
+  // SAVE ORDER FOR ADMIN PANEL
+  // =========================================
+
+  const orderData = {
+
+    orderID: orderID,
+
+    date: orderDate,
+
+    name: name,
+
+    mobile: phone,
+
+    area: area,
+
+    address: address,
+
+    products: products,
+
+    productsTotal: productsTotal,
+
+    deliveryCharge: deliveryCharge,
+
+    grandTotal: grandTotal,
+
+    payment: payment,
+
+    note: note,
+
+    status: "Pending"
+
+  };
+
+
+  saveOrderForAdmin(orderData);
+
+
+  // =========================================
   // WHATSAPP MESSAGE
+  // =========================================
 
   const message =
 `🛒 *New Haat2Bari Order*
@@ -723,7 +838,9 @@ ${note}
 Please confirm my order.`;
 
   
+  // =========================================
   // WHATSAPP URL
+  // =========================================
 
   const whatsappURL =
     "https://wa.me/" +
@@ -732,7 +849,9 @@ Please confirm my order.`;
     encodeURIComponent(message);
 
 
+  // =========================================
   // ORDER ID PREVIEW
+  // =========================================
 
   const orderPreview =
     document.getElementById(
@@ -749,7 +868,9 @@ Please confirm my order.`;
   }
 
 
+  // =========================================
   // SUCCESS POPUP DATA
+  // =========================================
 
   const successPopup =
     document.getElementById(
@@ -783,7 +904,9 @@ Please confirm my order.`;
   }
 
 
+  // =========================================
   // OPEN WHATSAPP
+  // =========================================
 
   window.open(
     whatsappURL,
@@ -791,7 +914,9 @@ Please confirm my order.`;
   );
 
 
+  // =========================================
   // SHOW SUCCESS POPUP
+  // =========================================
 
   setTimeout(function() {
 
