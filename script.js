@@ -1,7 +1,7 @@
 // =========================================
 // HAAT2BARI
 // FINAL CART + SEARCH + CATEGORY
-// ORDER ID + DELIVERY + WHATSAPP
+// ORDER ID + DELIVERY + TOTAL + WHATSAPP
 // =========================================
 
 const WHATSAPP_NUMBER = "919832495276";
@@ -45,14 +45,66 @@ function addToCart(name, price) {
 
 
 // =========================================
+// PRODUCT TOTAL
+// =========================================
+
+function getProductsTotal() {
+
+  return cart.reduce(function(sum, item) {
+
+    return sum + (item.price * item.quantity);
+
+  }, 0);
+}
+
+
+// =========================================
+// UPDATE ORDER TOTAL
+// =========================================
+
+function updateOrderTotal() {
+
+  const productsTotal = getProductsTotal();
+  const deliveryCharge = getDeliveryCharge();
+  const grandTotal = productsTotal + deliveryCharge;
+
+  const productsTotalElement =
+    document.getElementById("orderProductsTotal");
+
+  const deliveryTotalElement =
+    document.getElementById("orderDeliveryTotal");
+
+  const grandTotalElement =
+    document.getElementById("orderGrandTotal");
+
+  if (productsTotalElement) {
+    productsTotalElement.textContent = productsTotal;
+  }
+
+  if (deliveryTotalElement) {
+    deliveryTotalElement.textContent = deliveryCharge;
+  }
+
+  if (grandTotalElement) {
+    grandTotalElement.textContent = grandTotal;
+  }
+}
+
+
+// =========================================
 // UPDATE CART
 // =========================================
 
 function updateCart() {
 
-  const cartItems = document.getElementById("cartItems");
-  const cartTotal = document.getElementById("cartTotal");
-  const cartCount = document.getElementById("cartCount");
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const cartTotal =
+    document.getElementById("cartTotal");
+
+  const cartCount =
+    document.getElementById("cartCount");
 
   if (!cartItems || !cartTotal) {
     return;
@@ -68,6 +120,9 @@ function updateCart() {
     if (cartCount) {
       cartCount.textContent = "0 Items";
     }
+
+    updateOrderProducts();
+    updateOrderTotal();
 
     return;
   }
@@ -91,11 +146,17 @@ function updateCart() {
     cartItem.className = "cart-item";
 
     cartItem.innerHTML = `
+
       <div>
+
         <strong>${item.name}</strong>
+
         <br>
+
         ₹${item.price} × ${item.quantity}
-        = <strong>₹${itemTotal}</strong>
+        =
+        <strong>₹${itemTotal}</strong>
+
       </div>
 
       <div class="cart-buttons">
@@ -103,7 +164,8 @@ function updateCart() {
         <button
           type="button"
           class="qty-btn"
-          onclick="decreaseQuantity(${index})">
+          onclick="decreaseQuantity(${index})"
+        >
           −
         </button>
 
@@ -112,18 +174,21 @@ function updateCart() {
         <button
           type="button"
           class="qty-btn"
-          onclick="increaseQuantity(${index})">
+          onclick="increaseQuantity(${index})"
+        >
           +
         </button>
 
         <button
           type="button"
           class="remove-btn"
-          onclick="removeFromCart(${index})">
+          onclick="removeFromCart(${index})"
+        >
           ✕
         </button>
 
       </div>
+
     `;
 
     cartItems.appendChild(cartItem);
@@ -133,9 +198,15 @@ function updateCart() {
   cartTotal.textContent = total;
 
   if (cartCount) {
+
     cartCount.textContent =
-      itemCount + (itemCount === 1 ? " Item" : " Items");
+      itemCount +
+      (itemCount === 1 ? " Item" : " Items");
+
   }
+
+  updateOrderProducts();
+  updateOrderTotal();
 }
 
 
@@ -257,10 +328,12 @@ function filterProducts() {
   });
 
   if (noProducts) {
+
     noProducts.style.display =
       visibleProducts === 0
         ? "block"
         : "none";
+
   }
 }
 
@@ -303,11 +376,13 @@ function updateDeliveryCharge() {
 
   chargeInput.value =
     "₹" + charge;
+
+  updateOrderTotal();
 }
 
 
 // =========================================
-// UPDATE PRODUCTS IN ORDER FORM
+// UPDATE PRODUCTS IN ORDER
 // =========================================
 
 function updateOrderProducts() {
@@ -339,6 +414,8 @@ function updateOrderProducts() {
       );
 
     }).join("\n");
+
+  updateOrderTotal();
 }
 
 
@@ -358,7 +435,6 @@ function goToOrder() {
   }
 
   updateOrderProducts();
-
   updateDeliveryCharge();
 
   const order =
@@ -376,7 +452,7 @@ function goToOrder() {
 
 
 // =========================================
-// CREATE UNIQUE ORDER ID
+// CREATE ORDER ID
 // =========================================
 
 function createOrderID() {
@@ -447,31 +523,25 @@ function submitOrder(event) {
     return;
   }
 
-
   const name =
     document.getElementById("name")
       ?.value.trim() || "";
-
 
   const phone =
     document.getElementById("phone")
       ?.value.trim() || "";
 
-
   const area =
     document.getElementById("area")
       ?.value.trim() || "";
-
 
   const address =
     document.getElementById("address")
       ?.value.trim() || "";
 
-
   const payment =
     document.getElementById("payment")
       ?.value || "Cash on Delivery";
-
 
   const note =
     document.getElementById("note")
@@ -488,18 +558,27 @@ function submitOrder(event) {
       "সঠিক 10 digit Indian mobile number দিন।"
     );
 
-    document.getElementById("phone")?.focus();
+    document
+      .getElementById("phone")
+      ?.focus();
 
     return;
   }
 
 
   // =========================================
-  // DELIVERY
+  // TOTAL
   // =========================================
 
   const deliveryCharge =
     getDeliveryCharge();
+
+  const productsTotal =
+    getProductsTotal();
+
+  const grandTotal =
+    productsTotal +
+    deliveryCharge;
 
 
   // =========================================
@@ -518,28 +597,6 @@ function submitOrder(event) {
       );
 
     }).join("\n");
-
-
-  // =========================================
-  // PRODUCT TOTAL
-  // =========================================
-
-  const productsTotal =
-    cart.reduce(function(sum, item) {
-
-      return sum +
-        (item.price * item.quantity);
-
-    }, 0);
-
-
-  // =========================================
-  // GRAND TOTAL
-  // =========================================
-
-  const grandTotal =
-    productsTotal +
-    deliveryCharge;
 
 
   // =========================================
@@ -629,10 +686,15 @@ Please confirm my order.`;
 
     alert(
       "✅ Order Ready!\n\n" +
-      "Order ID: " + orderID +
+      "Order ID: " +
+      orderID +
       "\n\n" +
       "WhatsApp-এ Order পাঠানোর জন্য প্রস্তুত হয়েছে।" +
-      "\n\nGrand Total: ₹" +
+      "\n\nProducts Total: ₹" +
+      productsTotal +
+      "\nDelivery: ₹" +
+      deliveryCharge +
+      "\nGrand Total: ₹" +
       grandTotal
     );
 
@@ -657,16 +719,24 @@ document.addEventListener(
 
 
     const search =
-      document.getElementById("productSearch");
+      document.getElementById(
+        "productSearch"
+      );
 
     const category =
-      document.getElementById("categoryFilter");
+      document.getElementById(
+        "categoryFilter"
+      );
 
     const delivery =
-      document.getElementById("deliveryDistance");
+      document.getElementById(
+        "deliveryDistance"
+      );
 
     const orderForm =
-      document.getElementById("orderForm");
+      document.getElementById(
+        "orderForm"
+      );
 
 
     if (search) {
