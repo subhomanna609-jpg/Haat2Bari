@@ -1,6 +1,6 @@
 // =========================================
 // HAAT2BARI
-// PROFESSIONAL CART + SEARCH + CATEGORY
+// FINAL CART + SEARCH + CATEGORY
 // ORDER ID + DELIVERY + WHATSAPP
 // =========================================
 
@@ -52,6 +52,7 @@ function updateCart() {
 
   const cartItems = document.getElementById("cartItems");
   const cartTotal = document.getElementById("cartTotal");
+  const cartCount = document.getElementById("cartCount");
 
   if (!cartItems || !cartTotal) {
     return;
@@ -64,10 +65,15 @@ function updateCart() {
 
     cartTotal.textContent = "0";
 
+    if (cartCount) {
+      cartCount.textContent = "0 Items";
+    }
+
     return;
   }
 
   let total = 0;
+  let itemCount = 0;
 
   cartItems.innerHTML = "";
 
@@ -77,6 +83,7 @@ function updateCart() {
       item.price * item.quantity;
 
     total += itemTotal;
+    itemCount += item.quantity;
 
     const cartItem =
       document.createElement("div");
@@ -124,16 +131,23 @@ function updateCart() {
   });
 
   cartTotal.textContent = total;
+
+  if (cartCount) {
+    cartCount.textContent =
+      itemCount + (itemCount === 1 ? " Item" : " Items");
+  }
 }
 
 
 // =========================================
-// INCREASE
+// INCREASE QUANTITY
 // =========================================
 
 function increaseQuantity(index) {
 
-  if (!cart[index]) return;
+  if (!cart[index]) {
+    return;
+  }
 
   cart[index].quantity++;
 
@@ -142,12 +156,14 @@ function increaseQuantity(index) {
 
 
 // =========================================
-// DECREASE
+// DECREASE QUANTITY
 // =========================================
 
 function decreaseQuantity(index) {
 
-  if (!cart[index]) return;
+  if (!cart[index]) {
+    return;
+  }
 
   cart[index].quantity--;
 
@@ -160,12 +176,14 @@ function decreaseQuantity(index) {
 
 
 // =========================================
-// REMOVE
+// REMOVE FROM CART
 // =========================================
 
 function removeFromCart(index) {
 
-  if (!cart[index]) return;
+  if (!cart[index]) {
+    return;
+  }
 
   cart.splice(index, 1);
 
@@ -188,6 +206,9 @@ function filterProducts() {
   const products =
     document.querySelectorAll(".product-card");
 
+  const noProducts =
+    document.getElementById("noProducts");
+
   if (!searchInput || !categoryFilter) {
     return;
   }
@@ -200,40 +221,52 @@ function filterProducts() {
   const selectedCategory =
     categoryFilter.value;
 
+  let visibleProducts = 0;
+
   products.forEach(function(product) {
 
-    const nameElement =
-      product.querySelector("h3");
-
-    const name =
-      nameElement
-        ? nameElement.textContent
-            .toLowerCase()
-            .trim()
-        : "";
+    const searchableText =
+      (
+        product.textContent +
+        " " +
+        (product.dataset.search || "")
+      )
+        .toLowerCase();
 
     const category =
       product.dataset.category || "";
 
     const matchesSearch =
       searchText === "" ||
-      name.includes(searchText);
+      searchableText.includes(searchText);
 
     const matchesCategory =
       selectedCategory === "all" ||
       category === selectedCategory;
 
+    const show =
+      matchesSearch && matchesCategory;
+
     product.style.display =
-      matchesSearch && matchesCategory
-        ? ""
-        : "none";
+      show ? "" : "none";
+
+    if (show) {
+      visibleProducts++;
+    }
 
   });
+
+  if (noProducts) {
+    noProducts.style.display =
+      visibleProducts === 0
+        ? "block"
+        : "none";
+  }
 }
 
 
 // =========================================
-// DELIVERY CHARGE
+// GET DELIVERY CHARGE
 // =========================================
 
 function getDeliveryCharge() {
@@ -274,6 +307,42 @@ function updateDeliveryCharge() {
 
 
 // =========================================
+// UPDATE PRODUCTS IN ORDER FORM
+// =========================================
+
+function updateOrderProducts() {
+
+  const productsInput =
+    document.getElementById("productsInput");
+
+  if (!productsInput) {
+    return;
+  }
+
+  if (cart.length === 0) {
+
+    productsInput.value =
+      "Cart এখনো খালি।";
+
+    return;
+  }
+
+  productsInput.value =
+    cart.map(function(item) {
+
+      return (
+        item.name +
+        " × " +
+        item.quantity +
+        " = ₹" +
+        (item.price * item.quantity)
+      );
+
+    }).join("\n");
+}
+
+
+// =========================================
 // GO TO ORDER
 // =========================================
 
@@ -288,25 +357,7 @@ function goToOrder() {
     return;
   }
 
-  const productsInput =
-    document.getElementById("productsInput");
-
-  if (productsInput) {
-
-    productsInput.value =
-      cart.map(function(item) {
-
-        return (
-          item.name +
-          " × " +
-          item.quantity +
-          " = ₹" +
-          (item.price * item.quantity)
-        );
-
-      }).join("\n");
-
-  }
+  updateOrderProducts();
 
   updateDeliveryCharge();
 
@@ -325,22 +376,57 @@ function goToOrder() {
 
 
 // =========================================
-// CREATE ORDER ID
+// CREATE UNIQUE ORDER ID
 // =========================================
 
 function createOrderID() {
 
   const now = new Date();
 
-  const date =
-    now.getFullYear().toString() +
-    String(now.getMonth() + 1).padStart(2, "0") +
-    String(now.getDate()).padStart(2, "0");
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(now.getMonth() + 1)
+      .padStart(2, "0");
+
+  const day =
+    String(now.getDate())
+      .padStart(2, "0");
+
+  const hours =
+    String(now.getHours())
+      .padStart(2, "0");
+
+  const minutes =
+    String(now.getMinutes())
+      .padStart(2, "0");
 
   const random =
-    Math.floor(1000 + Math.random() * 9000);
+    Math.floor(
+      100 + Math.random() * 900
+    );
 
-  return "HB-" + date + "-" + random;
+  return (
+    "HB-" +
+    year +
+    month +
+    day +
+    "-" +
+    hours +
+    minutes +
+    random
+  );
+}
+
+
+// =========================================
+// MOBILE VALIDATION
+// =========================================
+
+function validateMobile(phone) {
+
+  return /^[6-9][0-9]{9}$/.test(phone);
 }
 
 
@@ -363,32 +449,63 @@ function submitOrder(event) {
 
 
   const name =
-    document.getElementById("name")?.value.trim() || "";
+    document.getElementById("name")
+      ?.value.trim() || "";
+
 
   const phone =
-    document.getElementById("phone")?.value.trim() || "";
+    document.getElementById("phone")
+      ?.value.trim() || "";
+
 
   const area =
-    document.getElementById("area")?.value.trim() || "";
+    document.getElementById("area")
+      ?.value.trim() || "";
+
 
   const address =
-    document.getElementById("address")?.value.trim() || "";
+    document.getElementById("address")
+      ?.value.trim() || "";
+
 
   const payment =
-    document.getElementById("payment")?.value ||
-    "Cash on Delivery";
+    document.getElementById("payment")
+      ?.value || "Cash on Delivery";
+
 
   const note =
-    document.getElementById("note")?.value.trim() ||
-    "None";
+    document.getElementById("note")
+      ?.value.trim() || "None";
 
 
+  // =========================================
+  // MOBILE CHECK
+  // =========================================
+
+  if (!validateMobile(phone)) {
+
+    alert(
+      "সঠিক 10 digit Indian mobile number দিন।"
+    );
+
+    document.getElementById("phone")?.focus();
+
+    return;
+  }
+
+
+  // =========================================
   // DELIVERY
+  // =========================================
+
   const deliveryCharge =
     getDeliveryCharge();
 
 
+  // =========================================
   // PRODUCTS
+  // =========================================
+
   const products =
     cart.map(function(item) {
 
@@ -403,7 +520,10 @@ function submitOrder(event) {
     }).join("\n");
 
 
+  // =========================================
   // PRODUCT TOTAL
+  // =========================================
+
   const productsTotal =
     cart.reduce(function(sum, item) {
 
@@ -413,48 +533,61 @@ function submitOrder(event) {
     }, 0);
 
 
+  // =========================================
   // GRAND TOTAL
+  // =========================================
+
   const grandTotal =
     productsTotal +
     deliveryCharge;
 
 
+  // =========================================
   // ORDER ID
+  // =========================================
+
   const orderID =
     createOrderID();
 
 
+  // =========================================
   // WHATSAPP MESSAGE
+  // =========================================
+
   const message =
 `🛒 *New Haat2Bari Order*
 
-🆔 Order ID: ${orderID}
+🆔 *Order ID:* ${orderID}
 
-👤 Name: ${name}
+👤 *Name:* ${name}
 
-📞 Mobile: ${phone}
+📞 *Mobile:* ${phone}
 
-📍 Area: ${area}
+📍 *Area:* ${area}
 
-🏠 Address:
+🏠 *Address:*
 ${address}
 
-🛍️ Products:
+🛍️ *Products:*
 ${products}
 
-💰 Products Total: ₹${productsTotal}
+💰 *Products Total:* ₹${productsTotal}
 
-🚚 Delivery Charge: ₹${deliveryCharge}
+🚚 *Delivery Charge:* ₹${deliveryCharge}
 
-💵 *Grand Total: ₹${grandTotal}*
+💵 *Grand Total:* ₹${grandTotal}
 
-💳 Payment: ${payment}
+💳 *Payment:* ${payment}
 
-📝 Note:
+📝 *Note:*
 ${note}
 
 Please confirm my order.`;
 
+
+  // =========================================
+  // WHATSAPP URL
+  // =========================================
 
   const whatsappURL =
     "https://wa.me/" +
@@ -463,25 +596,47 @@ Please confirm my order.`;
     encodeURIComponent(message);
 
 
+  // =========================================
+  // SHOW ORDER ID
+  // =========================================
+
+  const orderPreview =
+    document.getElementById("orderIdPreview");
+
+  if (orderPreview) {
+
+    orderPreview.textContent =
+      "🆔 Order ID: " + orderID;
+
+  }
+
+
+  // =========================================
   // OPEN WHATSAPP
+  // =========================================
+
   window.open(
     whatsappURL,
     "_blank"
   );
 
 
-  // CUSTOMER CONFIRMATION
+  // =========================================
+  // CONFIRMATION
+  // =========================================
+
   setTimeout(function() {
 
     alert(
       "✅ Order Ready!\n\n" +
       "Order ID: " + orderID +
       "\n\n" +
-      "WhatsApp-এ আপনার Order পাঠানো হয়েছে।\n" +
-      "Grand Total: ₹" + grandTotal
+      "WhatsApp-এ Order পাঠানোর জন্য প্রস্তুত হয়েছে।" +
+      "\n\nGrand Total: ₹" +
+      grandTotal
     );
 
-  }, 800);
+  }, 700);
 
 }
 
@@ -498,12 +653,20 @@ document.addEventListener(
 
     updateDeliveryCharge();
 
+    filterProducts();
+
 
     const search =
       document.getElementById("productSearch");
 
     const category =
       document.getElementById("categoryFilter");
+
+    const delivery =
+      document.getElementById("deliveryDistance");
+
+    const orderForm =
+      document.getElementById("orderForm");
 
 
     if (search) {
@@ -521,6 +684,26 @@ document.addEventListener(
       category.addEventListener(
         "change",
         filterProducts
+      );
+
+    }
+
+
+    if (delivery) {
+
+      delivery.addEventListener(
+        "change",
+        updateDeliveryCharge
+      );
+
+    }
+
+
+    if (orderForm) {
+
+      orderForm.addEventListener(
+        "submit",
+        submitOrder
       );
 
     }
