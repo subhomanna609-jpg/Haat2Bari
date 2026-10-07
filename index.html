@@ -7,7 +7,7 @@
 
   <title>Haat2Bari - আপনার বাজার এখন বাড়িতে</title>
 
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 
 <body>
@@ -112,8 +112,7 @@
 
       </div>
 
-
-      <div class="card" style="max-width:850px;margin:0 auto;text-align:left;">
+      <div class="card delivery-card">
 
         <p>
           <strong>📍 Delivery Areas:</strong>
@@ -134,7 +133,7 @@
           🟠 5 km-এর বেশি — <strong>₹20</strong>
         </p>
 
-        <p style="margin-bottom:0;">
+        <p class="last-text">
           📌 Delivery availability আপনার ঠিকানা অনুযায়ী confirm করা হবে।
         </p>
 
@@ -161,20 +160,17 @@
       </div>
 
 
-      <!-- SEARCH & CATEGORY -->
+      <!-- SEARCH -->
       <div class="shop-tools">
 
         <input
           type="text"
           id="productSearch"
           placeholder="🔍 Product খুঁজুন..."
-          oninput="filterProducts()"
+          autocomplete="off"
         >
 
-        <select
-          id="categoryFilter"
-          onchange="filterProducts()"
-        >
+        <select id="categoryFilter">
 
           <option value="all">
             সব Product
@@ -214,185 +210,237 @@
 
 
       <!-- PRODUCTS -->
-      <div class="product-grid">
+      <div class="product-grid" id="productGrid">
 
-        <div class="product-card" data-category="grocery">
+        <div class="product-card" data-category="grocery" data-search="চাল rice">
           <img class="product-image" src="images/01_chal_1kg.jpg" alt="চাল 1 kg">
           <h3>চাল 1 kg</h3>
           <p>Fresh Rice</p>
           <div class="product-price">₹50</div>
-          <button class="add-cart" onclick="addToCart('চাল 1 kg', 50)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('চাল 1 kg', 50)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="grocery">
+        <div class="product-card" data-category="grocery" data-search="আটা atta wheat flour">
           <img class="product-image" src="images/02_ata_1kg.jpg" alt="আটা 1 kg">
           <h3>আটা 1 kg</h3>
           <p>Wheat Flour</p>
           <div class="product-price">₹45</div>
-          <button class="add-cart" onclick="addToCart('আটা 1 kg', 45)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('আটা 1 kg', 45)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="grocery">
+        <div class="product-card" data-category="grocery" data-search="মসুর ডাল masoor dal">
           <img class="product-image" src="images/03_masur_dal_1kg.jpg" alt="মসুর ডাল 1 kg">
           <h3>মসুর ডাল 1 kg</h3>
           <p>Masoor Dal</p>
           <div class="product-price">₹100</div>
-          <button class="add-cart" onclick="addToCart('মসুর ডাল 1 kg', 100)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('মসুর ডাল 1 kg', 100)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="grocery">
+        <div class="product-card" data-category="grocery" data-search="মুগ ডাল moong dal">
           <img class="product-image" src="images/04_mug_dal_1kg.jpg" alt="মুগ ডাল 1 kg">
           <h3>মুগ ডাল 1 kg</h3>
           <p>Moong Dal</p>
           <div class="product-price">₹130</div>
-          <button class="add-cart" onclick="addToCart('মুগ ডাল 1 kg', 130)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('মুগ ডাল 1 kg', 130)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="grocery">
+        <div class="product-card" data-category="grocery" data-search="লবণ salt">
           <img class="product-image" src="images/05_lobon_1kg.jpg" alt="লবণ 1 kg">
           <h3>লবণ 1 kg</h3>
           <p>Salt</p>
           <div class="product-price">₹25</div>
-          <button class="add-cart" onclick="addToCart('লবণ 1 kg', 25)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('লবণ 1 kg', 25)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="grocery">
+        <div class="product-card" data-category="grocery" data-search="চিনি sugar">
           <img class="product-image" src="images/06_chini_1kg.jpg" alt="চিনি 1 kg">
           <h3>চিনি 1 kg</h3>
           <p>Sugar</p>
           <div class="product-price">₹50</div>
-          <button class="add-cart" onclick="addToCart('চিনি 1 kg', 50)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('চিনি 1 kg', 50)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="oil">
+        <div class="product-card" data-category="oil" data-search="সরিষার তেল mustard oil">
           <img class="product-image" src="images/07_sorishar_tel_1l.jpg" alt="সরিষার তেল 1 L">
           <h3>সরিষার তেল 1 L</h3>
           <p>Mustard Oil</p>
           <div class="product-price">₹160</div>
-          <button class="add-cart" onclick="addToCart('সরিষার তেল 1 L', 160)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('সরিষার তেল 1 L', 160)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="oil">
+        <div class="product-card" data-category="oil" data-search="সয়াবিন তেল soybean oil">
           <img class="product-image" src="images/08_soyabin_tel_1l.jpg" alt="সয়াবিন তেল 1 L">
           <h3>সয়াবিন তেল 1 L</h3>
           <p>Soybean Oil</p>
           <div class="product-price">₹140</div>
-          <button class="add-cart" onclick="addToCart('সয়াবিন তেল 1 L', 140)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('সয়াবিন তেল 1 L', 140)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="snacks">
+        <div class="product-card" data-category="snacks" data-search="বিস্কুট biscuit biscuits">
           <img class="product-image" src="images/09_biscuit_1packet.jpg" alt="বিস্কুট">
           <h3>বিস্কুট 1 packet</h3>
           <p>Biscuits</p>
           <div class="product-price">₹10</div>
-          <button class="add-cart" onclick="addToCart('বিস্কুট 1 packet', 10)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('বিস্কুট 1 packet', 10)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="snacks">
+        <div class="product-card" data-category="snacks" data-search="নুডলস noodles">
           <img class="product-image" src="images/10_noodles_1packet.jpg" alt="নুডলস">
           <h3>নুডলস 1 packet</h3>
           <p>Noodles</p>
           <div class="product-price">₹15</div>
-          <button class="add-cart" onclick="addToCart('নুডলস 1 packet', 15)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('নুডলস 1 packet', 15)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="snacks">
+        <div class="product-card" data-category="snacks" data-search="চানাচুর chanachur">
           <img class="product-image" src="images/11_chanachur_200g.jpg" alt="চানাচুর">
           <h3>চানাচুর 200 g</h3>
           <p>Chanachur</p>
           <div class="product-price">₹35</div>
-          <button class="add-cart" onclick="addToCart('চানাচুর 200 g', 35)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('চানাচুর 200 g', 35)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="snacks">
+        <div class="product-card" data-category="snacks" data-search="চা tea">
           <img class="product-image" src="images/12_tea_250g.jpg" alt="চা">
           <h3>চা 250 g</h3>
           <p>Tea</p>
           <div class="product-price">₹120</div>
-          <button class="add-cart" onclick="addToCart('চা 250 g', 120)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('চা 250 g', 120)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="personal">
+        <div class="product-card" data-category="personal" data-search="সাবান soap">
           <img class="product-image" src="images/13_soap_1pc.jpg" alt="সাবান">
           <h3>সাবান 1 pc</h3>
           <p>Bath Soap</p>
           <div class="product-price">₹35</div>
-          <button class="add-cart" onclick="addToCart('সাবান 1 pc', 35)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('সাবান 1 pc', 35)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="personal">
+        <div class="product-card" data-category="personal" data-search="টুথপেস্ট toothpaste">
           <img class="product-image" src="images/14_toothpaste_100g.jpg" alt="টুথপেস্ট">
           <h3>টুথপেস্ট 100 g</h3>
           <p>Toothpaste</p>
           <div class="product-price">₹60</div>
-          <button class="add-cart" onclick="addToCart('টুথপেস্ট 100 g', 60)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('টুথপেস্ট 100 g', 60)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="household">
+        <div class="product-card" data-category="household" data-search="ডিটারজেন্ট detergent">
           <img class="product-image" src="images/15_detergent_1kg.jpg" alt="ডিটারজেন্ট">
           <h3>ডিটারজেন্ট 1 kg</h3>
           <p>Detergent</p>
           <div class="product-price">₹70</div>
-          <button class="add-cart" onclick="addToCart('ডিটারজেন্ট 1 kg', 70)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('ডিটারজেন্ট 1 kg', 70)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="fresh">
+        <div class="product-card" data-category="fresh" data-search="ডিম egg eggs">
           <img class="product-image" src="images/16_egg_6pcs.jpg" alt="ডিম">
           <h3>ডিম 6 pcs</h3>
           <p>Fresh Eggs</p>
           <div class="product-price">₹45</div>
-          <button class="add-cart" onclick="addToCart('ডিম 6 pcs', 45)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('ডিম 6 pcs', 45)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="drinks">
+        <div class="product-card" data-category="drinks" data-search="পানীয় জল water">
           <img class="product-image" src="images/17_water_1l.jpg" alt="পানীয় জল">
           <h3>পানীয় জল 1 L</h3>
           <p>Drinking Water</p>
           <div class="product-price">₹20</div>
-          <button class="add-cart" onclick="addToCart('পানীয় জল 1 L', 20)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('পানীয় জল 1 L', 20)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="fresh">
+        <div class="product-card" data-category="fresh" data-search="আলু potato">
           <img class="product-image" src="images/18_aloo_1kg.jpg" alt="আলু">
           <h3>আলু 1 kg</h3>
           <p>Fresh Potato</p>
           <div class="product-price">₹30</div>
-          <button class="add-cart" onclick="addToCart('আলু 1 kg', 30)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('আলু 1 kg', 30)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="fresh">
+        <div class="product-card" data-category="fresh" data-search="পেঁয়াজ onion">
           <img class="product-image" src="images/19_piyaj_1kg.jpg" alt="পেঁয়াজ">
           <h3>পেঁয়াজ 1 kg</h3>
           <p>Fresh Onion</p>
           <div class="product-price">₹35</div>
-          <button class="add-cart" onclick="addToCart('পেঁয়াজ 1 kg', 35)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('পেঁয়াজ 1 kg', 35)">
+            🛒 Add to Cart
+          </button>
         </div>
 
-        <div class="product-card" data-category="fresh">
+        <div class="product-card" data-category="fresh" data-search="টমেটো tomato">
           <img class="product-image" src="images/20_tomato_1kg.jpg" alt="টমেটো">
           <h3>টমেটো 1 kg</h3>
           <p>Fresh Tomato</p>
           <div class="product-price">₹40</div>
-          <button class="add-cart" onclick="addToCart('টমেটো 1 kg', 40)">🛒 Add to Cart</button>
+          <button class="add-cart" onclick="addToCart('টমেটো 1 kg', 40)">
+            🛒 Add to Cart
+          </button>
         </div>
 
+      </div>
+
+      <div id="noProducts" class="no-products">
+        😕 কোনো Product পাওয়া যায়নি।
       </div>
 
 
       <!-- CART -->
       <div class="cart-box" id="cart">
 
-        <h2>🛒 Your Cart</h2>
+        <div class="cart-heading">
+          <h2>🛒 Your Cart</h2>
+          <span id="cartCount">0 Items</span>
+        </div>
 
         <div id="cartItems">
           <p>আপনার Cart এখনো খালি।</p>
         </div>
 
-        <h3>
-          Total: ₹<span id="cartTotal">0</span>
-        </h3>
+        <div class="cart-total-row">
+          <span>Products Total</span>
+          <strong>₹<span id="cartTotal">0</span></strong>
+        </div>
 
-        <button type="button" class="primary" onclick="goToOrder()">
+        <button
+          type="button"
+          class="primary order-cart-btn"
+          onclick="goToOrder()"
+        >
           📦 Order Now
         </button>
 
@@ -453,7 +501,6 @@
 
       </div>
 
-
       <div class="owner-card">
 
         <img
@@ -504,12 +551,14 @@
 
       </div>
 
-
       <form
         class="order-form"
         id="orderForm"
-        onsubmit="submitOrder(event)"
       >
+
+        <div class="order-id-box" id="orderIdPreview">
+          🆔 Order ID তৈরি হবে Submit করার সময়
+        </div>
 
         <label>
           Name
@@ -526,7 +575,9 @@
           <input
             type="tel"
             id="phone"
-            placeholder="আপনার মোবাইল নম্বর"
+            placeholder="10 digit mobile number"
+            inputmode="numeric"
+            maxlength="10"
             required
           >
         </label>
@@ -550,15 +601,10 @@
           ></textarea>
         </label>
 
-
-        <!-- DELIVERY DISTANCE -->
         <label>
           Delivery Distance
 
-          <select
-            id="deliveryDistance"
-            onchange="updateDeliveryCharge()"
-          >
+          <select id="deliveryDistance">
 
             <option value="0">
               5 km-এর মধ্যে — FREE
@@ -572,8 +618,6 @@
 
         </label>
 
-
-        <!-- DELIVERY CHARGE -->
         <label>
           Delivery Charge
 
@@ -586,8 +630,6 @@
 
         </label>
 
-
-        <!-- PRODUCTS -->
         <label>
           Products
 
@@ -599,8 +641,6 @@
 
         </label>
 
-
-        <!-- PAYMENT -->
         <label>
           Payment
 
@@ -618,8 +658,6 @@
 
         </label>
 
-
-        <!-- NOTE -->
         <label>
           Note
 
@@ -629,7 +667,6 @@
           ></textarea>
 
         </label>
-
 
         <button
           type="submit"
@@ -663,6 +700,7 @@
           <a
             href="https://wa.me/919832495276"
             target="_blank"
+            rel="noopener"
             class="primary"
           >
             WhatsApp
@@ -692,194 +730,14 @@
     </p>
 
     <p>
-      Local Grocery Delivery
+      আপনার বাজার, আপনার বাড়িতে।
     </p>
 
   </footer>
 
 
   <!-- JAVASCRIPT -->
-  <script src="script.js?v=4"></script>
-
-
-  <!-- DELIVERY + WHATSAPP ORDER SYSTEM -->
-  <script>
-
-    function updateDeliveryCharge() {
-
-      const select = document.getElementById("deliveryDistance");
-      const chargeInput = document.getElementById("deliveryCharge");
-
-      if (!select || !chargeInput) return;
-
-      const charge = Number(select.value) || 0;
-
-      chargeInput.value = "₹" + charge;
-    }
-
-
-    function goToOrder() {
-
-      if (typeof cart === "undefined" || cart.length === 0) {
-
-        alert("প্রথমে Cart-এ Product যোগ করুন।");
-
-        return;
-      }
-
-
-      const productsText = cart
-        .map(item =>
-          `${item.name} × ${item.quantity} = ₹${item.price * item.quantity}`
-        )
-        .join("\n");
-
-
-      const productsInput =
-        document.getElementById("productsInput");
-
-      if (productsInput) {
-
-        productsInput.value = productsText;
-
-      }
-
-
-      updateDeliveryCharge();
-
-
-      const orderSection =
-        document.getElementById("order");
-
-      if (orderSection) {
-
-        orderSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
-
-    }
-
-
-    function submitOrder(event) {
-
-      event.preventDefault();
-
-
-      if (typeof cart === "undefined" || cart.length === 0) {
-
-        alert("প্রথমে Cart-এ Product যোগ করুন।");
-
-        return;
-      }
-
-
-      const name =
-        document.getElementById("name")?.value.trim() || "";
-
-
-      const phone =
-        document.getElementById("phone")?.value.trim() || "";
-
-
-      const area =
-        document.getElementById("area")?.value.trim() || "";
-
-
-      const address =
-        document.getElementById("address")?.value.trim() || "";
-
-
-      const payment =
-        document.getElementById("payment")?.value ||
-        "Cash on Delivery";
-
-
-      const note =
-        document.getElementById("note")?.value.trim() || "";
-
-
-      const deliveryDistance =
-        document.getElementById("deliveryDistance")?.value ||
-        "0";
-
-
-      const deliveryCharge =
-        Number(deliveryDistance) || 0;
-
-
-      const products = cart
-        .map(item =>
-          `${item.name} × ${item.quantity} = ₹${item.price * item.quantity}`
-        )
-        .join("\n");
-
-
-      const productsTotal =
-        cart.reduce(
-          (sum, item) =>
-            sum + item.price * item.quantity,
-          0
-        );
-
-
-      const grandTotal =
-        productsTotal + deliveryCharge;
-
-
-      const message = `🛒 *New Haat2Bari Order*
-
-👤 Name: ${name}
-
-📞 Mobile: ${phone}
-
-📍 Area: ${area}
-
-🏠 Address:
-${address}
-
-🛍️ Products:
-${products}
-
-💰 Products Total: ₹${productsTotal}
-
-🚚 Delivery Charge: ₹${deliveryCharge}
-
-💵 Grand Total: ₹${grandTotal}
-
-💳 Payment: ${payment}
-
-📝 Note:
-${note || "None"}
-
-Please confirm my order.`;
-
-
-      const whatsappURL =
-        "https://wa.me/919832495276?text=" +
-        encodeURIComponent(message);
-
-
-      window.open(
-        whatsappURL,
-        "_blank"
-      );
-
-    }
-
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function () {
-
-        updateDeliveryCharge();
-
-      }
-    );
-
-  </script>
+  <script src="script.js?v=6"></script>
 
 </body>
 
